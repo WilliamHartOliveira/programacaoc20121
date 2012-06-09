@@ -1,0 +1,7 @@
+server: mysql.flete.com.br
+
+database: flete01
+
+uid: flete01
+
+password: 12qwaszx
