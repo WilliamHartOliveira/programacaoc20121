@@ -1,5 +1,5 @@
 package br.com.facdombosco.progc.dvo.vendas;
-// Generated 16/06/2012 10:52:30 by Hibernate Tools 3.2.1.GA
+// Generated 23/06/2012 10:48:05 by Hibernate Tools 3.2.1.GA
 
 
 import javax.persistence.Column;
