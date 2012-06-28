@@ -1,5 +1,6 @@
 package br.com.facdombosco.progc.app.main;
 
+import br.com.facdombosco.progc.app.vendas.GUIVendas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -45,19 +46,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         menuVendas = new javax.swing.JMenu();
-        itemDeMenuCliente_Vendas = new javax.swing.JMenuItem();
-        itemDeMenuTipoCliente_Vendas = new javax.swing.JMenuItem();
-        itemDeMenuCategoriaVendedor_Vendas = new javax.swing.JMenuItem();
-        itemDeMenuOrcamento_Vendas = new javax.swing.JMenuItem();
-        itemDeMenuHistoricoCompras_Vendas = new javax.swing.JMenuItem();
-        itemDeMenuTabelaDePreco_Vendas = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        itemMenuRelatorio_Vendas = new javax.swing.JMenu();
-        itemDeMenuRelatorioCliente_Vendas = new javax.swing.JMenuItem();
-        itemDeMenuRelatorioTipoCliente_Vendas = new javax.swing.JMenuItem();
-        itemDeMenuRelatorioCategoriaVendedor_Vendas = new javax.swing.JMenuItem();
-        itemDeMenuRelatorioTabelaDePreco_Vendas = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        pedidoVenda_Vendas = new javax.swing.JMenuItem();
         itemDeMenuSair_Vendas = new javax.swing.JMenuItem();
         menuServico = new javax.swing.JMenu();
         solicitacaoDeOrcamento_Servicos = new javax.swing.JMenuItem();
@@ -90,7 +79,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         lHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lHora.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Desenvolvido pelo Grupo de Programação C - Faculdade Dom Bosco de Porto Alegre");
@@ -98,91 +87,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         menuVendas.setText("Vendas");
 
-        itemDeMenuCliente_Vendas.setText("Cliente");
-        itemDeMenuCliente_Vendas.addActionListener(new java.awt.event.ActionListener() {
+        pedidoVenda_Vendas.setText("Pedido de Venda");
+        pedidoVenda_Vendas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuCliente_VendasActionPerformed(evt);
+                pedidoVenda_VendasActionPerformed(evt);
             }
         });
-        menuVendas.add(itemDeMenuCliente_Vendas);
-
-        itemDeMenuTipoCliente_Vendas.setText("Tipo Cliente");
-        itemDeMenuTipoCliente_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuTipoCliente_VendasActionPerformed(evt);
-            }
-        });
-        menuVendas.add(itemDeMenuTipoCliente_Vendas);
-
-        itemDeMenuCategoriaVendedor_Vendas.setText("Categoria de Vendedor");
-        itemDeMenuCategoriaVendedor_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuCategoriaVendedor_VendasActionPerformed(evt);
-            }
-        });
-        menuVendas.add(itemDeMenuCategoriaVendedor_Vendas);
-
-        itemDeMenuOrcamento_Vendas.setText("Orçamento");
-        itemDeMenuOrcamento_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuOrcamento_VendasActionPerformed(evt);
-            }
-        });
-        menuVendas.add(itemDeMenuOrcamento_Vendas);
-
-        itemDeMenuHistoricoCompras_Vendas.setText("Histórico Compras");
-        itemDeMenuHistoricoCompras_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuHistoricoCompras_VendasActionPerformed(evt);
-            }
-        });
-        menuVendas.add(itemDeMenuHistoricoCompras_Vendas);
-
-        itemDeMenuTabelaDePreco_Vendas.setText("Tabela de Preço");
-        itemDeMenuTabelaDePreco_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuTabelaDePreco_VendasActionPerformed(evt);
-            }
-        });
-        menuVendas.add(itemDeMenuTabelaDePreco_Vendas);
-        menuVendas.add(jSeparator2);
-
-        itemMenuRelatorio_Vendas.setText("Relatório");
-
-        itemDeMenuRelatorioCliente_Vendas.setText("Cliente");
-        itemDeMenuRelatorioCliente_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuRelatorioCliente_VendasActionPerformed(evt);
-            }
-        });
-        itemMenuRelatorio_Vendas.add(itemDeMenuRelatorioCliente_Vendas);
-
-        itemDeMenuRelatorioTipoCliente_Vendas.setText("Tipo Cliente");
-        itemDeMenuRelatorioTipoCliente_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuRelatorioTipoCliente_VendasActionPerformed(evt);
-            }
-        });
-        itemMenuRelatorio_Vendas.add(itemDeMenuRelatorioTipoCliente_Vendas);
-
-        itemDeMenuRelatorioCategoriaVendedor_Vendas.setText("Categoria Vendedor");
-        itemDeMenuRelatorioCategoriaVendedor_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuRelatorioCategoriaVendedor_VendasActionPerformed(evt);
-            }
-        });
-        itemMenuRelatorio_Vendas.add(itemDeMenuRelatorioCategoriaVendedor_Vendas);
-
-        itemDeMenuRelatorioTabelaDePreco_Vendas.setText("Tabela de Preço");
-        itemDeMenuRelatorioTabelaDePreco_Vendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuRelatorioTabelaDePreco_VendasActionPerformed(evt);
-            }
-        });
-        itemMenuRelatorio_Vendas.add(itemDeMenuRelatorioTabelaDePreco_Vendas);
-
-        menuVendas.add(itemMenuRelatorio_Vendas);
-        menuVendas.add(jSeparator3);
+        menuVendas.add(pedidoVenda_Vendas);
 
         itemDeMenuSair_Vendas.setText("Sair");
         itemDeMenuSair_Vendas.addActionListener(new java.awt.event.ActionListener() {
@@ -348,14 +259,6 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_itemDeMenuProdutoActionPerformed
 
-    private void itemDeMenuTipoCliente_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuTipoCliente_VendasActionPerformed
-
-    }//GEN-LAST:event_itemDeMenuTipoCliente_VendasActionPerformed
-
-    private void itemDeMenuCategoriaVendedor_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuCategoriaVendedor_VendasActionPerformed
-        
-    }//GEN-LAST:event_itemDeMenuCategoriaVendedor_VendasActionPerformed
-
     private void solicitacaoDeOrcamento_ServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solicitacaoDeOrcamento_ServicosActionPerformed
 
     }//GEN-LAST:event_solicitacaoDeOrcamento_ServicosActionPerformed
@@ -376,41 +279,18 @@ public class GUIPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_itemDeMenuSair_VendasActionPerformed
 
-    private void itemDeMenuOrcamento_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuOrcamento_VendasActionPerformed
-
-    }//GEN-LAST:event_itemDeMenuOrcamento_VendasActionPerformed
-
-    private void itemDeMenuTabelaDePreco_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuTabelaDePreco_VendasActionPerformed
-        
-    }//GEN-LAST:event_itemDeMenuTabelaDePreco_VendasActionPerformed
-
-    private void itemDeMenuCliente_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuCliente_VendasActionPerformed
-
-    }//GEN-LAST:event_itemDeMenuCliente_VendasActionPerformed
+    private void pedidoVenda_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoVenda_VendasActionPerformed
+        if((guivendas == null)||(!guivendas.isVisible())){
+            guivendas = new GUIVendas();
+            desktopPane.add(guivendas);
+            guivendas.setPosicao();
+            guivendas.setVisible(true);
+        }
+    }//GEN-LAST:event_pedidoVenda_VendasActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void itemDeMenuRelatorioCliente_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioCliente_VendasActionPerformed
-        
-    }//GEN-LAST:event_itemDeMenuRelatorioCliente_VendasActionPerformed
-
-    private void itemDeMenuRelatorioTipoCliente_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioTipoCliente_VendasActionPerformed
-        
-    }//GEN-LAST:event_itemDeMenuRelatorioTipoCliente_VendasActionPerformed
-
-    private void itemDeMenuRelatorioTabelaDePreco_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioTabelaDePreco_VendasActionPerformed
-
-    }//GEN-LAST:event_itemDeMenuRelatorioTabelaDePreco_VendasActionPerformed
-
-    private void itemDeMenuRelatorioCategoriaVendedor_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioCategoriaVendedor_VendasActionPerformed
-
-    }//GEN-LAST:event_itemDeMenuRelatorioCategoriaVendedor_VendasActionPerformed
-
-    private void itemDeMenuHistoricoCompras_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuHistoricoCompras_VendasActionPerformed
-
-    }//GEN-LAST:event_itemDeMenuHistoricoCompras_VendasActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
@@ -421,26 +301,13 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem estatisicas_Servicos;
     private javax.swing.JMenuItem itemDeMenuAjuda;
     private javax.swing.JMenuItem itemDeMenuCadastroUsuario;
-    private javax.swing.JMenuItem itemDeMenuCategoriaVendedor_Vendas;
-    private javax.swing.JMenuItem itemDeMenuCliente_Vendas;
     private javax.swing.JMenuItem itemDeMenuFornecedor;
-    private javax.swing.JMenuItem itemDeMenuHistoricoCompras_Vendas;
-    private javax.swing.JMenuItem itemDeMenuOrcamento_Vendas;
     private javax.swing.JMenuItem itemDeMenuProduto;
-    private javax.swing.JMenuItem itemDeMenuRelatorioCategoriaVendedor_Vendas;
-    private javax.swing.JMenuItem itemDeMenuRelatorioCliente_Vendas;
-    private javax.swing.JMenuItem itemDeMenuRelatorioTabelaDePreco_Vendas;
-    private javax.swing.JMenuItem itemDeMenuRelatorioTipoCliente_Vendas;
     private javax.swing.JMenuItem itemDeMenuSair_Vendas;
-    private javax.swing.JMenuItem itemDeMenuTabelaDePreco_Vendas;
-    private javax.swing.JMenuItem itemDeMenuTipoCliente_Vendas;
-    private javax.swing.JMenu itemMenuRelatorio_Vendas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JLabel lHora;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuBar menuBar;
@@ -449,8 +316,10 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuUsuario;
     public static javax.swing.JMenu menuVendas;
     private javax.swing.JMenuItem ordemDeServico_Servicos;
+    private javax.swing.JMenuItem pedidoVenda_Vendas;
     private javax.swing.JMenuItem relatoriosServicos_Servicos;
     private javax.swing.JMenuItem solicitacaoDeOrcamento_Servicos;
     // End of variables declaration//GEN-END:variables
     private GUIAjuda guiajuda;
+    private GUIVendas guivendas;
 }

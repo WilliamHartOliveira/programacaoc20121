@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://mysql.profries.com:3306/progc1</property>
+    <property name="hibernate.connection.username">progc</property>
+    <property name="hibernate.connection.password">dombosco</property>
+    <property name="hibernate.show_sql">true</property>
+
+    <!-- ACESSOS -->
+    <mapping class="br.com.facdombosco.progc.dvo.acessos.Usuario"/>
+
+    <!-- VENDAS -->
+    <mapping class="br.com.facdombosco.progc.dvo.vendas.Produto"/>
+    <mapping class="br.com.facdombosco.progc.dvo.vendas.Venda"/>
+    <mapping class="br.com.facdombosco.progc.dvo.vendas.Cliente"/>
+    <mapping class="br.com.facdombosco.progc.dvo.vendas.Pessoa"/>
+    <mapping class="br.com.facdombosco.progc.dvo.vendas.ItemVendaId"/>
+    <mapping class="br.com.facdombosco.progc.dvo.vendas.Vendedor"/>
+    <mapping class="br.com.facdombosco.progc.dvo.vendas.ItemVenda"/>
+    <mapping class="br.com.facdombosco.progc.dvo.vendas.NotaFiscal"/>
+    
+    <!-- SUPRIMENTOS -->
+    <mapping class="br.com.facdombosco.progc.dvo.suprimentos.EstoqueItem"/>
+    
+    <!-- SERVICOS -->
+    <!--<mapping class="br.com.facdombosco.progc.dvo.servicos.Fornecedor"/>-->
+    
+  </session-factory>
+</hibernate-configuration>
