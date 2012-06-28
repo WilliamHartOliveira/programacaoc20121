@@ -12,96 +12,13 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuCliente_Vendas">
+            <MenuItem class="javax.swing.JMenuItem" name="pedidoVenda_Vendas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cliente"/>
+                <Property name="text" type="java.lang.String" value="Pedido de Venda"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuCliente_VendasActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pedidoVenda_VendasActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuTipoCliente_Vendas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tipo Cliente"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuTipoCliente_VendasActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuCategoriaVendedor_Vendas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Categoria de Vendedor"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuCategoriaVendedor_VendasActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuOrcamento_Vendas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Or&#xe7;amento"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuOrcamento_VendasActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuHistoricoCompras_Vendas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Hist&#xf3;rico Compras"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuHistoricoCompras_VendasActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuTabelaDePreco_Vendas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Tabela de Pre&#xe7;o"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuTabelaDePreco_VendasActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
-            </MenuItem>
-            <Menu class="javax.swing.JMenu" name="itemMenuRelatorio_Vendas">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
-              </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuRelatorioCliente_Vendas">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Cliente"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuRelatorioCliente_VendasActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuRelatorioTipoCliente_Vendas">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tipo Cliente"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuRelatorioTipoCliente_VendasActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuRelatorioCategoriaVendedor_Vendas">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Categoria Vendedor"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuRelatorioCategoriaVendedor_VendasActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuRelatorioTabelaDePreco_Vendas">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tabela de Pre&#xe7;o"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemDeMenuRelatorioTabelaDePreco_VendasActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="itemDeMenuSair_Vendas">
               <Properties>
