@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.facdombosco.progc.service.baseclasses;
 
 import br.com.facdombosco.progc.dao.baseclasses.BaseDAO;
@@ -10,10 +5,6 @@ import java.io.Serializable;
 import java.util.Dictionary;
 import java.util.List;
 
-/**
- *
- * @author msantos
- */
 public class BaseService<T, ID extends Serializable> {
 
     private BaseDAO<T, ID> baseDao;
