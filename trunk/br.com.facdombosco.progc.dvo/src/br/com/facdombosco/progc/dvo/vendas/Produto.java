@@ -1,6 +1,4 @@
 package br.com.facdombosco.progc.dvo.vendas;
-// Generated 23/06/2012 10:48:05 by Hibernate Tools 3.2.1.GA
-
 
 import java.util.HashSet;
 import java.util.Set;

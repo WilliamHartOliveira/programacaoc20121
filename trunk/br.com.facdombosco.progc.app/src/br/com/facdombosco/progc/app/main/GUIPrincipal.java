@@ -1,6 +1,9 @@
 package br.com.facdombosco.progc.app.main;
 
 import br.com.facdombosco.progc.app.vendas.GUIVendas;
+import br.com.facdombosco.progc.app.vendas.GUIProduto;
+import br.com.facdombosco.progc.app.acessos.GUIUsuario;
+import br.com.facdombosco.progc.app.suprimentos.GUIEstoqueItem;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -50,14 +53,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         itemDeMenuSair_Vendas = new javax.swing.JMenuItem();
         menuServico = new javax.swing.JMenu();
         solicitacaoDeOrcamento_Servicos = new javax.swing.JMenuItem();
-        ordemDeServico_Servicos = new javax.swing.JMenuItem();
-        estatisicas_Servicos = new javax.swing.JMenuItem();
-        relatoriosServicos_Servicos = new javax.swing.JMenuItem();
         menuSuprimento = new javax.swing.JMenu();
-        itemDeMenuFornecedor = new javax.swing.JMenuItem();
+        itemDeMenuEstoqueItem = new javax.swing.JMenuItem();
         itemDeMenuProduto = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        itemDeMenuRelatorioEstoqueItem = new javax.swing.JMenuItem();
+        itemDeMenuRelatorioProduto = new javax.swing.JMenuItem();
         menuUsuario = new javax.swing.JMenu();
         itemDeMenuCadastroUsuario = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
@@ -75,11 +75,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jLabel2.setBounds(0, 0, 1250, 740);
         desktopPane.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        lHora.setFont(new java.awt.Font("Tahoma", 1, 18));
+        lHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lHora.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Desenvolvido pelo Grupo de Programação C - Faculdade Dom Bosco de Porto Alegre");
@@ -112,45 +112,17 @@ public class GUIPrincipal extends javax.swing.JFrame {
         solicitacaoDeOrcamento_Servicos.setActionCommand("SolicitacaoDeOrcamento");
         menuServico.add(solicitacaoDeOrcamento_Servicos);
 
-        ordemDeServico_Servicos.setText("Ordem de Serviço");
-        ordemDeServico_Servicos.setActionCommand("OrdemDeServico");
-        ordemDeServico_Servicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ordemDeServico_ServicosActionPerformed(evt);
-            }
-        });
-        menuServico.add(ordemDeServico_Servicos);
-
-        estatisicas_Servicos.setText("Estatísicas");
-        estatisicas_Servicos.setActionCommand("Estatisicas");
-        estatisicas_Servicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estatisicas_ServicosActionPerformed(evt);
-            }
-        });
-        menuServico.add(estatisicas_Servicos);
-
-        relatoriosServicos_Servicos.setText("Relatórios de Serviços");
-        relatoriosServicos_Servicos.setActionCommand("RelatoriosServicos");
-        relatoriosServicos_Servicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                relatoriosServicos_ServicosActionPerformed(evt);
-            }
-        });
-        menuServico.add(relatoriosServicos_Servicos);
-        relatoriosServicos_Servicos.getAccessibleContext().setAccessibleParent(this);
-
         menuBar.add(menuServico);
 
         menuSuprimento.setText("Suprimentos");
 
-        itemDeMenuFornecedor.setText("Fornecedor");
-        itemDeMenuFornecedor.addActionListener(new java.awt.event.ActionListener() {
+        itemDeMenuEstoqueItem.setText("Estoque Item");
+        itemDeMenuEstoqueItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemDeMenuFornecedorActionPerformed(evt);
+                itemDeMenuEstoqueItemActionPerformed(evt);
             }
         });
-        menuSuprimento.add(itemDeMenuFornecedor);
+        menuSuprimento.add(itemDeMenuEstoqueItem);
 
         itemDeMenuProduto.setText("Produto");
         itemDeMenuProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -160,21 +132,21 @@ public class GUIPrincipal extends javax.swing.JFrame {
         });
         menuSuprimento.add(itemDeMenuProduto);
 
-        jMenuItem1.setText("Solicitação de Compras");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        itemDeMenuRelatorioEstoqueItem.setText("Relatório Estoque");
+        itemDeMenuRelatorioEstoqueItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                itemDeMenuRelatorioEstoqueItemActionPerformed(evt);
             }
         });
-        menuSuprimento.add(jMenuItem1);
+        menuSuprimento.add(itemDeMenuRelatorioEstoqueItem);
 
-        jMenuItem2.setText("Relatórios");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        itemDeMenuRelatorioProduto.setText("Relatório Produto");
+        itemDeMenuRelatorioProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                itemDeMenuRelatorioProdutoActionPerformed(evt);
             }
         });
-        menuSuprimento.add(jMenuItem2);
+        menuSuprimento.add(itemDeMenuRelatorioProduto);
 
         menuBar.add(menuSuprimento);
 
@@ -239,7 +211,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }
 
     private void itemDeMenuAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuAjudaActionPerformed
-         if ((guiajuda == null) || (!guiajuda.isVisible())) {
+        if ((guiajuda == null) || (!guiajuda.isVisible())) {
             guiajuda = new GUIAjuda();
             desktopPane.add(guiajuda);
             guiajuda.setPosicao();
@@ -248,32 +220,35 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemDeMenuAjudaActionPerformed
 
     private void itemDeMenuCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuCadastroUsuarioActionPerformed
-        
+        if ((guiUsuario == null) || (!guiUsuario.isVisible())) {
+            guiUsuario = new GUIUsuario();
+            desktopPane.add(guiUsuario);
+            guiUsuario.setPosicao();
+            guiUsuario.setVisible(true);
+        }
     }//GEN-LAST:event_itemDeMenuCadastroUsuarioActionPerformed
 
-    private void itemDeMenuFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuFornecedorActionPerformed
-
-    }//GEN-LAST:event_itemDeMenuFornecedorActionPerformed
+    private void itemDeMenuEstoqueItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuEstoqueItemActionPerformed
+        if ((guiEstoqueItem == null) || (!guiEstoqueItem.isVisible())) {
+            guiEstoqueItem = new GUIEstoqueItem();
+            desktopPane.add(guiProduto);
+            guiEstoqueItem.setPosicao();
+            guiEstoqueItem.setVisible(true);
+        }
+    }//GEN-LAST:event_itemDeMenuEstoqueItemActionPerformed
 
     private void itemDeMenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuProdutoActionPerformed
-
+        if ((guiProduto == null) || (!guiProduto.isVisible())) {
+            guiProduto = new GUIProduto();
+            desktopPane.add(guiProduto);
+            guiProduto.setPosicao();
+            guiProduto.setVisible(true);
+        }
     }//GEN-LAST:event_itemDeMenuProdutoActionPerformed
 
     private void solicitacaoDeOrcamento_ServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solicitacaoDeOrcamento_ServicosActionPerformed
 
     }//GEN-LAST:event_solicitacaoDeOrcamento_ServicosActionPerformed
-
-    private void ordemDeServico_ServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordemDeServico_ServicosActionPerformed
-
-    }//GEN-LAST:event_ordemDeServico_ServicosActionPerformed
-
-    private void estatisicas_ServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estatisicas_ServicosActionPerformed
-
-    }//GEN-LAST:event_estatisicas_ServicosActionPerformed
-
-    private void relatoriosServicos_ServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosServicos_ServicosActionPerformed
-
-    }//GEN-LAST:event_relatoriosServicos_ServicosActionPerformed
 
     private void itemDeMenuSair_VendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuSair_VendasActionPerformed
         System.exit(0);
@@ -288,38 +263,38 @@ public class GUIPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pedidoVenda_VendasActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void itemDeMenuRelatorioEstoqueItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioEstoqueItemActionPerformed
 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_itemDeMenuRelatorioEstoqueItemActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void itemDeMenuRelatorioProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioProdutoActionPerformed
+        
+    }//GEN-LAST:event_itemDeMenuRelatorioProdutoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenuItem estatisicas_Servicos;
     private javax.swing.JMenuItem itemDeMenuAjuda;
     private javax.swing.JMenuItem itemDeMenuCadastroUsuario;
-    private javax.swing.JMenuItem itemDeMenuFornecedor;
+    private javax.swing.JMenuItem itemDeMenuEstoqueItem;
     private javax.swing.JMenuItem itemDeMenuProduto;
+    private javax.swing.JMenuItem itemDeMenuRelatorioEstoqueItem;
+    private javax.swing.JMenuItem itemDeMenuRelatorioProduto;
     private javax.swing.JMenuItem itemDeMenuSair_Vendas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lHora;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuBar menuBar;
-    public static javax.swing.JMenu menuServico;
+    private javax.swing.JMenu menuServico;
     private javax.swing.JMenu menuSuprimento;
     private javax.swing.JMenu menuUsuario;
     public static javax.swing.JMenu menuVendas;
-    private javax.swing.JMenuItem ordemDeServico_Servicos;
     private javax.swing.JMenuItem pedidoVenda_Vendas;
-    private javax.swing.JMenuItem relatoriosServicos_Servicos;
     private javax.swing.JMenuItem solicitacaoDeOrcamento_Servicos;
     // End of variables declaration//GEN-END:variables
     private GUIAjuda guiajuda;
     private GUIVendas guivendas;
+    private GUIProduto guiProduto;
+    private GUIUsuario guiUsuario;
+    private GUIEstoqueItem guiEstoqueItem;
 }
