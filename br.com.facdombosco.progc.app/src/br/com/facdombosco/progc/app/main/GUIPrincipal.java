@@ -62,6 +62,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         itemDeMenuCadastroUsuario = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         itemDeMenuAjuda = new javax.swing.JMenuItem();
+        jmCompra = new javax.swing.JMenu();
+        miCadastroFornecedor = new javax.swing.JMenuItem();
+        miCadastroFormaPagamento = new javax.swing.JMenuItem();
+        miConsultaRequisicao = new javax.swing.JMenuItem();
+        miRequisicaoPedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Integrado de Gestão - Picaredata");
@@ -75,11 +80,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jLabel2.setBounds(0, 0, 1250, 740);
         desktopPane.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        lHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lHora.setFont(new java.awt.Font("Tahoma", 1, 18));
         lHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lHora.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Desenvolvido pelo Grupo de Programação C - Faculdade Dom Bosco de Porto Alegre");
@@ -173,6 +178,27 @@ public class GUIPrincipal extends javax.swing.JFrame {
         menuAjuda.add(itemDeMenuAjuda);
 
         menuBar.add(menuAjuda);
+
+        jmCompra.setMnemonic('c');
+        jmCompra.setText("Compras");
+
+        miCadastroFornecedor.setMnemonic('f');
+        miCadastroFornecedor.setText("Cadastro de Fornecedores");
+        jmCompra.add(miCadastroFornecedor);
+
+        miCadastroFormaPagamento.setMnemonic('p');
+        miCadastroFormaPagamento.setText("Cadastro de Formas de Pagamentos");
+        jmCompra.add(miCadastroFormaPagamento);
+
+        miConsultaRequisicao.setMnemonic('r');
+        miConsultaRequisicao.setText("Consulta / Requisição");
+        jmCompra.add(miConsultaRequisicao);
+
+        miRequisicaoPedido.setMnemonic('i');
+        miRequisicaoPedido.setText("Requisição / Pedido");
+        jmCompra.add(miRequisicaoPedido);
+
+        menuBar.add(jmCompra);
 
         setJMenuBar(menuBar);
 
@@ -282,13 +308,18 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemDeMenuSair_Vendas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jmCompra;
     private javax.swing.JLabel lHora;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenu menuServico;
+    public static javax.swing.JMenu menuServico;
     private javax.swing.JMenu menuSuprimento;
     private javax.swing.JMenu menuUsuario;
     public static javax.swing.JMenu menuVendas;
+    private javax.swing.JMenuItem miCadastroFormaPagamento;
+    private javax.swing.JMenuItem miCadastroFornecedor;
+    private javax.swing.JMenuItem miConsultaRequisicao;
+    private javax.swing.JMenuItem miRequisicaoPedido;
     private javax.swing.JMenuItem pedidoVenda_Vendas;
     private javax.swing.JMenuItem solicitacaoDeOrcamento_Servicos;
     // End of variables declaration//GEN-END:variables
