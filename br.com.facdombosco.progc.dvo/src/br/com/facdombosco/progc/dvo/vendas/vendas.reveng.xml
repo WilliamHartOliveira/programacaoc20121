@@ -2,10 +2,11 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="progc1"/>
-  <table-filter match-name="Fornecedor"/>
+  <table-filter match-name="Cliente"/>
+  <table-filter match-name="ItemVenda"/>
+  <table-filter match-name="ItemVendaId"/>
+  <table-filter match-name="NotaFiscal"/>
   <table-filter match-name="Produto"/>
-  <table-filter match-name="Requisicao"/>
-  <table-filter match-name="RequisicaoProduto"/>
-  <table-filter match-name="FormaPagamento"/>
-  <table-filter match-name="Pedido"/>
+  <table-filter match-name="Venda"/>
+  <table-filter match-name="Vendedor"/>
 </hibernate-reverse-engineering>

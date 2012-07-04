@@ -257,7 +257,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private void itemDeMenuEstoqueItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuEstoqueItemActionPerformed
         if ((guiEstoqueItem == null) || (!guiEstoqueItem.isVisible())) {
             guiEstoqueItem = new GUIEstoqueItem();
-            desktopPane.add(guiProduto);
+            desktopPane.add(guiEstoqueItem);
             guiEstoqueItem.setPosicao();
             guiEstoqueItem.setVisible(true);
         }
