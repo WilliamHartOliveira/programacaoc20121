@@ -10,23 +10,14 @@
     <mapping class="br.com.facdombosco.progc.dvo.vendas.Produto"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.Venda"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.Cliente"/>
-    <mapping class="br.com.facdombosco.progc.dvo.vendas.Pessoa"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.ItemVendaId"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.Vendedor"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.ItemVenda"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.NotaFiscal"/>
     <mapping class="br.com.facdombosco.progc.dvo.suprimentos.EstoqueItem"/>
     <mapping class="br.com.facdombosco.progc.dvo.acessos.Usuario"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.Vendedor"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.Produto"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.Cliente"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.Venda"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.ItemVendaId"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.ItemVenda"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.NotaFiscal"/>
     <mapping class="br.com.facdombosco.progc.dvo.compras.FormaPagamento"/>
     <mapping class="br.com.facdombosco.progc.dvo.compras.Fornecedor"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.Produto"/>
     <mapping class="br.com.facdombosco.progc.dvo.compras.RequisicaoProduto"/>
     <mapping class="br.com.facdombosco.progc.dvo.compras.Requisicao"/>
   </session-factory>
