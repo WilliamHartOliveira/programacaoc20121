@@ -103,7 +103,11 @@ public class Fornecedor  implements java.io.Serializable {
     }
 
 
-
+    @Override
+    public String toString()
+    {
+        return this.getNome();
+    }
 
 }
 

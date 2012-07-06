@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 public class ProdutoTableModel extends AbstractTableModel{
 
     private List<Produto> produtos;
-    private String[] columnNames = {"Nome", "Valor Unitario"};
+    private String[] columnNames = {"Nome", "Valor Unitario", "Fornecedor"};
 
     public ProdutoTableModel(List<Produto> produto) {
         this.produtos = produto;
@@ -38,6 +38,8 @@ public class ProdutoTableModel extends AbstractTableModel{
             case 1:
                 value = produto.getValor().toString();
                 break;
+            case 2:
+                value = (produto.getFornecedor() == null ? "" : produto.getFornecedor().getNome());
             default:
                 break;
         }

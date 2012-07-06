@@ -9,7 +9,7 @@ import java.util.List;
 public class EstoqueItemService extends BaseService<EstoqueItem, Integer> {
     
     public EstoqueItemService() {
-        super(EstoqueItemDAO.class);
+        super(EstoqueItem.class);
     }
     
     @Override
@@ -17,7 +17,7 @@ public class EstoqueItemService extends BaseService<EstoqueItem, Integer> {
 
         StringBuilder sb = new StringBuilder();
 
-        if (object.getQtdProduto() > 0)
+        if (object.getQtdProduto() == 0)
             sb.append("A quantidade de estoque é obrigatória.");
         
         if (sb.length() > 0) {

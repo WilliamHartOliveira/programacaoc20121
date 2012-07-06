@@ -34,10 +34,10 @@ public class EstoqueItemTableModel extends AbstractTableModel{
 
         switch (columnIndex) {
             case 0:
-                value = estoqueItem.getQtdProduto();
+                value = (estoqueItem.getProduto() == null ? "" : estoqueItem.getProduto().getNome());
                 break;
             case 1:
-                value = estoqueItem.getIdProduto();
+                value = estoqueItem.getQtdProduto();
                 break;
             default:
                 break;
