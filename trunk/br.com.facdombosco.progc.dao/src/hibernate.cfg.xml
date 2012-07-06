@@ -16,7 +16,6 @@
     <mapping class="br.com.facdombosco.progc.dvo.vendas.Produto"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.Venda"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.Cliente"/>
-    <mapping class="br.com.facdombosco.progc.dvo.vendas.ItemVendaId"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.Vendedor"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.ItemVenda"/>
     <mapping class="br.com.facdombosco.progc.dvo.vendas.NotaFiscal"/>
