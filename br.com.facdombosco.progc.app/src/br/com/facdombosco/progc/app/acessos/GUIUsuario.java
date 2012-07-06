@@ -300,7 +300,6 @@ public class GUIUsuario extends javax.swing.JInternalFrame {
     }
 
     private Usuario carregarObjetoPersistencia() {
-
         Usuario usuario = new Usuario();
         usuario.setNome(this.txtNomeUsuario.getText());
         usuario.setNomeUsuario(this.txtLoginUsuario.getText());
@@ -308,9 +307,6 @@ public class GUIUsuario extends javax.swing.JInternalFrame {
         usuario.setVendas((this.chkVendasUsuario.isSelected() ? "S" : "N"));
         usuario.setServicos((this.chkServicosUsuario.isSelected() ? "S" : "N"));
         usuario.setSuprimentos((this.chkSuprimentoUsuario.isSelected() ? "S" : "N"));
-
-        if (this.edicao)
-            usuario.setIdUsuario(Integer.parseInt(this.txtCodigoUsuario.getText()));
 
         return usuario;
     }

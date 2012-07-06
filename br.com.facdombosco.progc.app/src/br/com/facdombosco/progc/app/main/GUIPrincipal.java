@@ -4,9 +4,16 @@ import br.com.facdombosco.progc.app.vendas.GUIVendas;
 import br.com.facdombosco.progc.app.vendas.GUIProduto;
 import br.com.facdombosco.progc.app.acessos.GUIUsuario;
 import br.com.facdombosco.progc.app.suprimentos.GUIEstoqueItem;
+import br.com.facdombosco.progc.dvo.acessos.Usuario;
+import br.com.facdombosco.progc.reportsGeneral.HibernateReport;
+import br.com.facdombosco.progc.service.suprimentos.EstoqueItemService;
+import br.com.facdombosco.progc.service.vendas.ProdutoService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import net.sf.jasperreports.engine.JRException;
 
 public class GUIPrincipal extends javax.swing.JFrame {
 
@@ -60,6 +67,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
         itemDeMenuRelatorioProduto = new javax.swing.JMenuItem();
         menuUsuario = new javax.swing.JMenu();
         itemDeMenuCadastroUsuario = new javax.swing.JMenuItem();
+        itemDeMenuRelatorioUsuario = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         itemDeMenuAjuda = new javax.swing.JMenuItem();
         jmCompra = new javax.swing.JMenu();
@@ -80,11 +88,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jLabel2.setBounds(0, 0, 1250, 740);
         desktopPane.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        lHora.setFont(new java.awt.Font("Tahoma", 1, 18));
+        lHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lHora.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Desenvolvido pelo Grupo de Programação C - Faculdade Dom Bosco de Porto Alegre");
@@ -157,13 +165,21 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         menuUsuario.setText("Usuário");
 
-        itemDeMenuCadastroUsuario.setText("Cadastro");
+        itemDeMenuCadastroUsuario.setText("Usuário");
         itemDeMenuCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemDeMenuCadastroUsuarioActionPerformed(evt);
             }
         });
         menuUsuario.add(itemDeMenuCadastroUsuario);
+
+        itemDeMenuRelatorioUsuario.setText("Relatório Usuário");
+        itemDeMenuRelatorioUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemDeMenuRelatorioUsuarioActionPerformed(evt);
+            }
+        });
+        menuUsuario.add(itemDeMenuRelatorioUsuario);
 
         menuBar.add(menuUsuario);
 
@@ -228,12 +244,11 @@ public class GUIPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void configurarPermissoes() {
-        menuVendas.setEnabled(true);
-        menuServico.setEnabled(true);
-        menuSuprimento.setEnabled(true);
-
-        menuUsuario.setEnabled(true);
+    public void configurarPermissoes(Usuario usuario) {
+        menuUsuario.setEnabled(usuario.getNomeUsuario().equals("admin") ? true : false);
+        menuVendas.setEnabled(usuario.getVendas().equals("S") ? true : false);
+        menuServico.setEnabled(usuario.getServicos().equals("S") ? true : false);
+        menuSuprimento.setEnabled(usuario.getSuprimentos().equals("S") ? true : false);
     }
 
     private void itemDeMenuAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuAjudaActionPerformed
@@ -290,12 +305,33 @@ public class GUIPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_pedidoVenda_VendasActionPerformed
 
     private void itemDeMenuRelatorioEstoqueItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioEstoqueItemActionPerformed
-
+        try {
+            HibernateReport.abrirReport();
+            
+            HibernateReport.abrirReport("../br.com.facdombosco.progc.reports/ReportsSuprimentos/reportEstoqueItem.jrxml",
+                                        new EstoqueItemService().findAll());
+        } catch (JRException ex) {
+            Logger.getLogger(GUIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_itemDeMenuRelatorioEstoqueItemActionPerformed
 
     private void itemDeMenuRelatorioProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioProdutoActionPerformed
-        
+        try {
+            HibernateReport.abrirReport("../br.com.facdombosco.progc.reports/ReportsVendas/reportProduto.jrxml",
+                                        new ProdutoService().findAll());
+        } catch (JRException ex) {
+            Logger.getLogger(GUIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_itemDeMenuRelatorioProdutoActionPerformed
+
+    private void itemDeMenuRelatorioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioUsuarioActionPerformed
+        try {
+            HibernateReport.abrirReport("../br.com.facdombosco.progc.reports/ReportsAcesps/reportUsuario.jrxml",
+                                        new ProdutoService().findAll());
+        } catch (JRException ex) {
+            Logger.getLogger(GUIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_itemDeMenuRelatorioUsuarioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane desktopPane;
@@ -305,6 +341,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemDeMenuProduto;
     private javax.swing.JMenuItem itemDeMenuRelatorioEstoqueItem;
     private javax.swing.JMenuItem itemDeMenuRelatorioProduto;
+    private javax.swing.JMenuItem itemDeMenuRelatorioUsuario;
     private javax.swing.JMenuItem itemDeMenuSair_Vendas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

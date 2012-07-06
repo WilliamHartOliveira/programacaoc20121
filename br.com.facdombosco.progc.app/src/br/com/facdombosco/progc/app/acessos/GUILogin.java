@@ -1,7 +1,9 @@
 package br.com.facdombosco.progc.app.acessos;
 
 import br.com.facdombosco.progc.app.main.*;
+import br.com.facdombosco.progc.dvo.acessos.Usuario;
 import br.com.facdombosco.progc.framework.utils.MessageHelper;
+import br.com.facdombosco.progc.service.acessos.UsuarioService;
 
 public class GUILogin extends javax.swing.JFrame {
 
@@ -179,10 +181,15 @@ public class GUILogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOkActionPerformed
+        Usuario usuario = new Usuario();
+        usuario.setNomeUsuario(tfUsuario.getText());
+        usuario.setSenha(String.copyValueOf(tfSenha.getPassword()));
 
         try {
+            Usuario usuarioRetorno = new UsuarioService().login(usuario);
+
             GUIPrincipal guiPrincipal = new GUIPrincipal();
-            guiPrincipal.configurarPermissoes();
+            guiPrincipal.configurarPermissoes(usuarioRetorno);
             guiPrincipal.setLocationRelativeTo(null);
             guiPrincipal.setVisible(true);
             this.setVisible(false);
