@@ -223,9 +223,6 @@ public class GUIEstoqueItem extends javax.swing.JInternalFrame {
 
         if(!this.txtId_Produto.getText().isEmpty())
             estoqueItem.setProduto(new ProdutoService().findById(Integer.parseInt(this.txtId_Produto.getText())));
-        
-        if (this.edicao)
-            estoqueItem.setIdEstoqueItem(Integer.parseInt(this.txtCodigo_EstoqueItem.getText()));
 
         return estoqueItem;
     }

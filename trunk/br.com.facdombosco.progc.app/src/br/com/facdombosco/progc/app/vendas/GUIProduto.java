@@ -248,9 +248,6 @@ public class GUIProduto extends javax.swing.JInternalFrame {
 
         produto.setNome(this.txtNome_Produto.getText());
 
-        if (this.edicao)
-            produto.setIdProduto(Integer.parseInt(this.txtCodigo_Produto.getText()));
-
         produto.setFornecedor(this.getFornecedorJComboBox().getFornecedorSelecionado());
         
         return produto;
