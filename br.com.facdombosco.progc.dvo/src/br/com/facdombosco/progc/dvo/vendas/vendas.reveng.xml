@@ -4,7 +4,6 @@
   <schema-selection match-catalog="progc1"/>
   <table-filter match-name="Cliente"/>
   <table-filter match-name="ItemVenda"/>
-  <table-filter match-name="ItemVendaId"/>
   <table-filter match-name="NotaFiscal"/>
   <table-filter match-name="Produto"/>
   <table-filter match-name="Venda"/>

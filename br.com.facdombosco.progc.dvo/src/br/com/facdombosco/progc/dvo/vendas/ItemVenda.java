@@ -1,15 +1,19 @@
 package br.com.facdombosco.progc.dvo.vendas;
-// Generated 23/06/2012 10:48:05 by Hibernate Tools 3.2.1.GA
+// Generated 05/07/2012 22:15:12 by Hibernate Tools 3.2.1.GA
 
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,42 +26,42 @@ import javax.persistence.Table;
 public class ItemVenda  implements java.io.Serializable {
 
 
-     private ItemVendaId id;
+     private Integer idItemVenda;
      private Venda venda;
      private Produto produto;
+     private int idVenda;
      private String quantidade;
+     private Set produtos = new HashSet(0);
 
     public ItemVenda() {
     }
 
 	
-    public ItemVenda(ItemVendaId id, Venda venda, Produto produto) {
-        this.id = id;
+    public ItemVenda(Venda venda, Produto produto, int idVenda) {
         this.venda = venda;
         this.produto = produto;
+        this.idVenda = idVenda;
     }
-    public ItemVenda(ItemVendaId id, Venda venda, Produto produto, String quantidade) {
-       this.id = id;
+    public ItemVenda(Venda venda, Produto produto, int idVenda, String quantidade, Set produtos) {
        this.venda = venda;
        this.produto = produto;
+       this.idVenda = idVenda;
        this.quantidade = quantidade;
+       this.produtos = produtos;
     }
    
-     @EmbeddedId
+     @Id @GeneratedValue(strategy=IDENTITY)
     
-    @AttributeOverrides( {
-        @AttributeOverride(name="idItemVenda", column=@Column(name="idItemVenda", nullable=false) ), 
-        @AttributeOverride(name="idVenda", column=@Column(name="idVenda", nullable=false) ), 
-        @AttributeOverride(name="idProduto", column=@Column(name="idProduto", nullable=false) ) } )
-    public ItemVendaId getId() {
-        return this.id;
+    @Column(name="idItemVenda", unique=true, nullable=false)
+    public Integer getIdItemVenda() {
+        return this.idItemVenda;
     }
     
-    public void setId(ItemVendaId id) {
-        this.id = id;
+    public void setIdItemVenda(Integer idItemVenda) {
+        this.idItemVenda = idItemVenda;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idItemVenda", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="idItemVenda", unique=true, nullable=false, insertable=false, updatable=false)
     public Venda getVenda() {
         return this.venda;
     }
@@ -66,13 +70,22 @@ public class ItemVenda  implements java.io.Serializable {
         this.venda = venda;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idProduto", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="idProduto", nullable=false)
     public Produto getProduto() {
         return this.produto;
     }
     
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+    
+    @Column(name="idVenda", nullable=false)
+    public int getIdVenda() {
+        return this.idVenda;
+    }
+    
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
     }
     
     @Column(name="quantidade", length=45)
@@ -82,6 +95,14 @@ public class ItemVenda  implements java.io.Serializable {
     
     public void setQuantidade(String quantidade) {
         this.quantidade = quantidade;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="itemVenda", targetEntity=Produto.class)
+    public Set getProdutos() {
+        return this.produtos;
+    }
+    
+    public void setProdutos(Set produtos) {
+        this.produtos = produtos;
     }
 
 
