@@ -2,6 +2,7 @@ package br.com.facdombosco.progc.app.suprimentos;
 
 import br.com.facdombosco.progc.dvo.suprimentos.EstoqueItem;
 import br.com.facdombosco.progc.service.suprimentos.EstoqueItemService;
+import br.com.facdombosco.progc.service.vendas.ProdutoService;
 import java.awt.Dimension;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -41,7 +42,7 @@ public class GUIEstoqueItem extends javax.swing.JInternalFrame {
         tblEstoqueItem = new javax.swing.JTable();
 
         setClosable(true);
-        setTitle("Produto");
+        setTitle("Estoque Item");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Produto"));
         jPanel1.setName("jPanel1"); // NOI18N
@@ -191,8 +192,10 @@ public class GUIEstoqueItem extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("Estoque Item");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -205,9 +208,9 @@ public class GUIEstoqueItem extends javax.swing.JInternalFrame {
     }
     
     private void carregarFormulario(EstoqueItem estoqueItem) {
-        this.txtCodigo_EstoqueItem.setText(String.valueOf(estoqueItem.getIdProduto()));
+        this.txtCodigo_EstoqueItem.setText(String.valueOf(estoqueItem.getIdEstoqueItem()));
         this.txtQtd_Produto.setText(String.valueOf(estoqueItem.getQtdProduto()));
-        this.txtId_Produto.setText(String.valueOf(estoqueItem.getIdProduto()));
+        this.txtId_Produto.setText(String.valueOf(estoqueItem.getProduto().getIdProduto()));
         this.edicao = true;
     }
 
@@ -219,7 +222,7 @@ public class GUIEstoqueItem extends javax.swing.JInternalFrame {
             estoqueItem.setQtdProduto(Integer.parseInt(this.txtQtd_Produto.getText()));
 
         if(!this.txtId_Produto.getText().isEmpty())
-            estoqueItem.setIdProduto(Integer.parseInt(this.txtId_Produto.getText()));
+            estoqueItem.setProduto(new ProdutoService().findById(Integer.parseInt(this.txtId_Produto.getText())));
         
         if (this.edicao)
             estoqueItem.setIdEstoqueItem(Integer.parseInt(this.txtCodigo_EstoqueItem.getText()));
