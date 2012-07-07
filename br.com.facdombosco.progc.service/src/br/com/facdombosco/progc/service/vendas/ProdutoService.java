@@ -46,6 +46,25 @@ public class ProdutoService extends BaseService<Produto, Integer> {
 
         new EstoqueItemService().save(estoqueItemPesquisa);
     }
+
+    public List<Produto> findByProduto(int idProduto) {
+
+        List<Produto> listEstoqueProduto = new ProdutoService().findAllByProperty("idProduto", idProduto);
+
+        if (listEstoqueProduto.size() == 1)
+            return listEstoqueProduto;
+
+        return null;
+    }
     
+    public Produto findByProd(int idProduto) {
+
+        List<Produto> listEstoqueProduto = new ProdutoService().findAllByProperty("idProduto", idProduto);
+
+        if (listEstoqueProduto.size() == 1)
+            return listEstoqueProduto.get(0);
+
+        return null;
+    }
 }
 
