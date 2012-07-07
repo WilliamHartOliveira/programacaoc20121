@@ -3,6 +3,10 @@ package br.com.facdombosco.progc.app.main;
 import br.com.facdombosco.progc.app.vendas.GUIVendas;
 import br.com.facdombosco.progc.app.vendas.GUIProduto;
 import br.com.facdombosco.progc.app.acessos.GUIUsuario;
+import br.com.facdombosco.progc.app.compras.frmCadastroFormaPagamento;
+import br.com.facdombosco.progc.app.compras.frmCadastroFornecedor;
+import br.com.facdombosco.progc.app.compras.frmConsultaRequisicao;
+import br.com.facdombosco.progc.app.compras.frmRequisicaoPedido;
 import br.com.facdombosco.progc.app.suprimentos.GUIEstoqueItem;
 import br.com.facdombosco.progc.dvo.acessos.Usuario;
 import br.com.facdombosco.progc.reportsGeneral.HibernateReport;
@@ -200,18 +204,38 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
         miCadastroFornecedor.setMnemonic('f');
         miCadastroFornecedor.setText("Cadastro de Fornecedores");
+        miCadastroFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroFornecedorActionPerformed(evt);
+            }
+        });
         jmCompra.add(miCadastroFornecedor);
 
         miCadastroFormaPagamento.setMnemonic('p');
         miCadastroFormaPagamento.setText("Cadastro de Formas de Pagamentos");
+        miCadastroFormaPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCadastroFormaPagamentoActionPerformed(evt);
+            }
+        });
         jmCompra.add(miCadastroFormaPagamento);
 
         miConsultaRequisicao.setMnemonic('r');
         miConsultaRequisicao.setText("Consulta / Requisição");
+        miConsultaRequisicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConsultaRequisicaoActionPerformed(evt);
+            }
+        });
         jmCompra.add(miConsultaRequisicao);
 
         miRequisicaoPedido.setMnemonic('i');
         miRequisicaoPedido.setText("Requisição / Pedido");
+        miRequisicaoPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRequisicaoPedidoActionPerformed(evt);
+            }
+        });
         jmCompra.add(miRequisicaoPedido);
 
         menuBar.add(jmCompra);
@@ -333,6 +357,50 @@ public class GUIPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itemDeMenuRelatorioUsuarioActionPerformed
 
+    private void miCadastroFormaPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroFormaPagamentoActionPerformed
+        if (vCadastroFormaPagamento == null || !vCadastroFormaPagamento.isVisible()) 
+        {
+            vCadastroFormaPagamento = new frmCadastroFormaPagamento();
+            
+            desktopPane.add(vCadastroFormaPagamento);
+            vCadastroFormaPagamento.setPosicao();
+            vCadastroFormaPagamento.setVisible(true);
+        }
+    }//GEN-LAST:event_miCadastroFormaPagamentoActionPerformed
+
+    private void miCadastroFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastroFornecedorActionPerformed
+        if (vCadastroFornecedor == null || !vCadastroFornecedor.isVisible()) 
+        {
+            vCadastroFornecedor = new frmCadastroFornecedor();
+            
+            desktopPane.add(vCadastroFornecedor);
+            vCadastroFornecedor.setPosicao();
+            vCadastroFornecedor.setVisible(true);
+        }
+    }//GEN-LAST:event_miCadastroFornecedorActionPerformed
+
+    private void miConsultaRequisicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaRequisicaoActionPerformed
+        if (vConsultaRequisicao == null || !vConsultaRequisicao.isVisible()) 
+        {
+            vConsultaRequisicao = new frmConsultaRequisicao();
+            
+            desktopPane.add(vConsultaRequisicao);
+            vConsultaRequisicao.setPosicao();
+            vConsultaRequisicao.setVisible(true);
+        }
+    }//GEN-LAST:event_miConsultaRequisicaoActionPerformed
+
+    private void miRequisicaoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRequisicaoPedidoActionPerformed
+        if (vRequisicaoPedido == null || !vRequisicaoPedido.isVisible()) 
+        {
+            vRequisicaoPedido = new frmRequisicaoPedido();
+            
+            desktopPane.add(vRequisicaoPedido);
+            vRequisicaoPedido.setPosicao();
+            vRequisicaoPedido.setVisible(true);
+        }
+    }//GEN-LAST:event_miRequisicaoPedidoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemDeMenuAjuda;
@@ -365,4 +433,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private GUIProduto guiProduto;
     private GUIUsuario guiUsuario;
     private GUIEstoqueItem guiEstoqueItem;
+    private frmCadastroFormaPagamento vCadastroFormaPagamento;
+    private frmCadastroFornecedor vCadastroFornecedor;
+    private frmConsultaRequisicao vConsultaRequisicao;
+    private frmRequisicaoPedido vRequisicaoPedido;
 }
