@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import br.com.facdombosco.progc.service.compras.FornecedorService;
 import br.com.facdombosco.progc.dvo.compras.Fornecedor;
 import br.com.facdombosco.progc.framework.utils.StringUtils;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
@@ -30,7 +31,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     private void LimitarTexto()
     {
          txtNome.setDocument(new FixedLengthDocument(30));
-         txtCnpj.setDocument(new FixedLengthDocument(11));
+         txtCnpj.setDocument(new FixedLengthDocument(13));
          txtCidade.setDocument(new FixedLengthDocument(30));
          txtEmail.setDocument(new FixedLengthDocument(30));
     }
@@ -66,7 +67,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         Fornecedor vFornecedor = new Fornecedor();
         
         vFornecedor.setNome(this.txtNome.getText());
-        vFornecedor.setCnpj(Integer.parseInt(this.txtCnpj.getText()));
+        vFornecedor.setCnpj(this.txtCnpj.getText());
         vFornecedor.setCidade(this.txtCidade.getText());
         vFornecedor.setTelefone(this.txtTelefone.getText());
         vFornecedor.setEmail(this.txtEmail.getText());
@@ -106,6 +107,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         btExcluir = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
         lblCodigo = new javax.swing.JLabel();
+        btFechar = new javax.swing.JButton();
         jpFornecedorCadastrado = new javax.swing.JPanel();
         spCadastroFornecedor = new javax.swing.JScrollPane();
         tbCadastroFornecedor = new javax.swing.JTable();
@@ -143,48 +145,47 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
             }
         });
 
-        txtEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14));
         txtEmail.setName("txtEmail"); // NOI18N
 
-        lblEmail.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblEmail.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblEmail.setForeground(new java.awt.Color(0, 0, 153));
         lblEmail.setText("E-mail");
         lblEmail.setName("lblEmail"); // NOI18N
 
-        lblTelefone.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblTelefone.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblTelefone.setForeground(new java.awt.Color(0, 0, 153));
         lblTelefone.setText("Telefone");
         lblTelefone.setName("lblTelefone"); // NOI18N
 
-        txtTelefone.setEditable(false);
         try {
             txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(###)####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtTelefone.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtTelefone.setFont(new java.awt.Font("Lucida Sans", 1, 14));
         txtTelefone.setName("txtTelefone"); // NOI18N
 
-        lblCidade.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblCidade.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblCidade.setForeground(new java.awt.Color(0, 0, 153));
         lblCidade.setText("Cidade");
         lblCidade.setName("lblCidade"); // NOI18N
 
-        txtCidade.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtCidade.setFont(new java.awt.Font("Lucida Sans", 1, 14));
         txtCidade.setName("txtCidade"); // NOI18N
 
-        lblCnpj.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblCnpj.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblCnpj.setForeground(new java.awt.Color(0, 0, 153));
         lblCnpj.setText("CNPJ");
         lblCnpj.setName("lblCnpj"); // NOI18N
 
-        txtCnpj.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtCnpj.setFont(new java.awt.Font("Lucida Sans", 1, 14));
         txtCnpj.setName("txtCnpj"); // NOI18N
 
-        txtNome.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtNome.setFont(new java.awt.Font("Lucida Sans", 1, 14));
         txtNome.setName("txtNome"); // NOI18N
 
-        lblNome.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblNome.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblNome.setForeground(new java.awt.Color(0, 0, 153));
         lblNome.setText("Nome");
         lblNome.setName("lblNome"); // NOI18N
@@ -193,7 +194,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         btLimpar.setForeground(new java.awt.Color(0, 0, 153));
         btLimpar.setMnemonic('l');
         btLimpar.setText("LIMPAR");
-        btLimpar.setName("btLimpar");
+        btLimpar.setName("btLimpar"); // NOI18N
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btLimparActionPerformed(evt);
@@ -204,7 +205,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         btExcluir.setForeground(new java.awt.Color(0, 0, 153));
         btExcluir.setMnemonic('e');
         btExcluir.setText("EXCLUIR");
-        btExcluir.setName("btExcluir");
+        btExcluir.setName("btExcluir"); // NOI18N
         btExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btExcluirActionPerformed(evt);
@@ -212,60 +213,68 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         });
 
         txtCodigo.setEditable(false);
-        txtCodigo.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        txtCodigo.setName("txtCodigo");
+        txtCodigo.setFont(new java.awt.Font("Lucida Sans", 1, 14));
+        txtCodigo.setName("txtCodigo"); // NOI18N
 
-        lblCodigo.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblCodigo.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblCodigo.setForeground(new java.awt.Color(0, 0, 153));
         lblCodigo.setText("Código");
-        lblCodigo.setName("lblCodigo");
+        lblCodigo.setName("lblCodigo"); // NOI18N
+
+        btFechar.setBackground(new java.awt.Color(255, 255, 255));
+        btFechar.setForeground(new java.awt.Color(0, 0, 153));
+        btFechar.setMnemonic('f');
+        btFechar.setText("FECHAR");
+        btFechar.setName("btFechar"); // NOI18N
+        btFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpIncluirFornecedorLayout = new javax.swing.GroupLayout(jpIncluirFornecedor);
         jpIncluirFornecedor.setLayout(jpIncluirFornecedorLayout);
         jpIncluirFornecedorLayout.setHorizontalGroup(
             jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
-                        .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCidade)
-                            .addComponent(lblNome)
-                            .addComponent(lblCnpj)
-                            .addComponent(lblCodigo))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCidade)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
-                        .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
-                                .addComponent(lblTelefone)
-                                .addGap(1, 1, 1))
-                            .addComponent(lblEmail))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
+                        .addComponent(lblTelefone)
+                        .addGap(1, 1, 1))
+                    .addComponent(lblEmail)
+                    .addComponent(lblCidade)
+                    .addComponent(lblCnpj)
+                    .addComponent(lblNome)
+                    .addComponent(lblCodigo))
+                .addGap(18, 18, 18)
+                .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpIncluirFornecedorLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
                         .addComponent(btSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btListar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addComponent(btListar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btFechar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCnpj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         jpIncluirFornecedorLayout.setVerticalGroup(
             jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIncluirFornecedorLayout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+            .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigo)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,11 +297,12 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
                     .addComponent(lblEmail))
                 .addGap(34, 34, 34)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btListar)
                     .addComponent(btLimpar)
                     .addComponent(btExcluir))
-                .addContainerGap())
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jpIncluirFornecedorLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtCidade, txtCnpj, txtEmail, txtNome, txtTelefone});
@@ -378,16 +388,11 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListarActionPerformed
-        if (StringUtils.isNumeric(this.txtCodigo.getText()))
-        {
-            FornecedorService vServicoFornecedor = new FornecedorService();
-            List<Fornecedor> vListaFornecedor = vServicoFornecedor.findAll(this.PesquisarDicionario());
-            FornecedorTableModel vTabelaModeloFornecedor = new FornecedorTableModel(vListaFornecedor);
-            
-            this.tbCadastroFornecedor.setModel(vTabelaModeloFornecedor);
-        }
-        else
-            JOptionPane.showMessageDialog(this, "O código digitado deve ser númerico!");
+        FornecedorService vServicoFornecedor = new FornecedorService();
+        List<Fornecedor> vListaFornecedor = vServicoFornecedor.findAll(this.PesquisarDicionario());
+        FornecedorTableModel vTabelaModeloFornecedor = new FornecedorTableModel(vListaFornecedor);
+
+        this.tbCadastroFornecedor.setModel(vTabelaModeloFornecedor);
     }//GEN-LAST:event_btListarActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
@@ -435,6 +440,10 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         }
     }//GEN-LAST:event_tbCadastroFornecedorMouseClicked
 
+    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btFecharActionPerformed
+
     /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -445,6 +454,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btExcluir;
+    private javax.swing.JButton btFechar;
     private javax.swing.JButton btLimpar;
     private javax.swing.JButton btListar;
     private javax.swing.JButton btSalvar;

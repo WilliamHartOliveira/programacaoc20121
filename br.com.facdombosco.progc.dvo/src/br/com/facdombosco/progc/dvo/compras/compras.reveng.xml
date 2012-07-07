@@ -6,4 +6,5 @@
   <table-filter match-name="Requisicao"/>
   <table-filter match-name="RequisicaoProduto"/>
   <table-filter match-name="FormaPagamento"/>
+  <table-filter match-name="Teste"/>
 </hibernate-reverse-engineering>

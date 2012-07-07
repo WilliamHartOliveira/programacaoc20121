@@ -4,8 +4,7 @@ import br.com.facdombosco.progc.app.vendas.GUIProduto;
 import br.com.facdombosco.progc.app.acessos.GUIUsuario;
 import br.com.facdombosco.progc.app.compras.frmCadastroFormaPagamento;
 import br.com.facdombosco.progc.app.compras.frmCadastroFornecedor;
-import br.com.facdombosco.progc.app.compras.frmConsultaRequisicao;
-import br.com.facdombosco.progc.app.compras.frmRequisicaoPedido;
+import br.com.facdombosco.progc.app.compras.frmFinalizarPedido;
 import br.com.facdombosco.progc.app.suprimentos.GUIEstoqueItem;
 import br.com.facdombosco.progc.app.vendas.GUIVendas;
 import br.com.facdombosco.progc.dvo.acessos.Usuario;
@@ -78,7 +77,6 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jmCompra = new javax.swing.JMenu();
         miCadastroFornecedor = new javax.swing.JMenuItem();
         miCadastroFormaPagamento = new javax.swing.JMenuItem();
-        miConsultaRequisicao = new javax.swing.JMenuItem();
         miRequisicaoPedido = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -225,15 +223,6 @@ public class GUIPrincipal extends javax.swing.JFrame {
             }
         });
         jmCompra.add(miCadastroFormaPagamento);
-
-        miConsultaRequisicao.setMnemonic('r');
-        miConsultaRequisicao.setText("Consulta / Requisição");
-        miConsultaRequisicao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miConsultaRequisicaoActionPerformed(evt);
-            }
-        });
-        jmCompra.add(miConsultaRequisicao);
 
         miRequisicaoPedido.setMnemonic('i');
         miRequisicaoPedido.setText("Requisição / Pedido");
@@ -383,25 +372,14 @@ public class GUIPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miCadastroFornecedorActionPerformed
 
-    private void miConsultaRequisicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConsultaRequisicaoActionPerformed
-        if (vConsultaRequisicao == null || !vConsultaRequisicao.isVisible()) 
-        {
-            vConsultaRequisicao = new frmConsultaRequisicao();
-            
-            desktopPane.add(vConsultaRequisicao);
-            vConsultaRequisicao.setPosicao();
-            vConsultaRequisicao.setVisible(true);
-        }
-    }//GEN-LAST:event_miConsultaRequisicaoActionPerformed
-
     private void miRequisicaoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRequisicaoPedidoActionPerformed
-        if (vRequisicaoPedido == null || !vRequisicaoPedido.isVisible()) 
+        if (vFinalizarPedido == null || !vFinalizarPedido.isVisible())
         {
-            vRequisicaoPedido = new frmRequisicaoPedido();
-            
-            desktopPane.add(vRequisicaoPedido);
-            vRequisicaoPedido.setPosicao();
-            vRequisicaoPedido.setVisible(true);
+            vFinalizarPedido = new frmFinalizarPedido();
+
+            desktopPane.add(vFinalizarPedido);
+            vFinalizarPedido.AdaptarPosicao();
+            vFinalizarPedido.setVisible(true);
         }
     }//GEN-LAST:event_miRequisicaoPedidoActionPerformed
 
@@ -436,7 +414,6 @@ public class GUIPrincipal extends javax.swing.JFrame {
     public static javax.swing.JMenu menuVendas;
     private javax.swing.JMenuItem miCadastroFormaPagamento;
     private javax.swing.JMenuItem miCadastroFornecedor;
-    private javax.swing.JMenuItem miConsultaRequisicao;
     private javax.swing.JMenuItem miRequisicaoPedido;
     private javax.swing.JMenuItem pedidoVenda_Vendas;
     private javax.swing.JMenuItem solicitacaoDeOrcamento_Servicos;
@@ -448,6 +425,5 @@ public class GUIPrincipal extends javax.swing.JFrame {
     private GUIEstoqueItem guiEstoqueItem;
     private frmCadastroFormaPagamento vCadastroFormaPagamento;
     private frmCadastroFornecedor vCadastroFornecedor;
-    private frmConsultaRequisicao vConsultaRequisicao;
-    private frmRequisicaoPedido vRequisicaoPedido;
+    private frmFinalizarPedido vFinalizarPedido;
 }
