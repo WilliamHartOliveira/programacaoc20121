@@ -363,7 +363,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
             vCadastroFormaPagamento = new frmCadastroFormaPagamento();
             
             desktopPane.add(vCadastroFormaPagamento);
-            vCadastroFormaPagamento.setPosicao();
+            vCadastroFormaPagamento.AdaptarPosicao();
             vCadastroFormaPagamento.setVisible(true);
         }
     }//GEN-LAST:event_miCadastroFormaPagamentoActionPerformed
