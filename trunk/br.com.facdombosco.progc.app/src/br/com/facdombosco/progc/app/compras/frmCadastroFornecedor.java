@@ -37,6 +37,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     
     private void LimparTexto()
     {
+        txtCodigo.setText("");
         txtNome.setText("");
         txtCnpj.setText("");
         txtCidade.setText("");
@@ -46,18 +47,18 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     
     private Dictionary<String, Object> PesquisarDicionario() 
     {
-        Dictionary<String, Object> properties = new Hashtable<String, Object>();
+        Dictionary<String, Object> vPropriedade = new Hashtable<String, Object>();
 
         if (!this.txtCodigo.getText().equals(""))
-            properties.put("idFornecedor", Integer.parseInt(this.txtCodigo.getText()));
+            vPropriedade.put("idFornecedor", Integer.parseInt(this.txtCodigo.getText()));
 
         if (!this.txtNome.getText().equals(""))
-            properties.put("nome", this.txtNome.getText());
+            vPropriedade.put("nome", this.txtNome.getText());
 
         if (!this.txtCnpj.getText().equals(""))
-            properties.put("cnpj", this.txtCnpj.getText());
+            vPropriedade.put("cnpj", this.txtCnpj.getText());
 
-        return properties;
+        return vPropriedade;
     }
     
     private Fornecedor PersistenciarObjeto() 
@@ -228,9 +229,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
                         .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(lblCidade))
+                            .addComponent(lblCidade)
                             .addComponent(lblNome)
                             .addComponent(lblCnpj)
                             .addComponent(lblCodigo))
@@ -399,7 +398,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
             vServicoFornecedor.save(this.PersistenciarObjeto());
             this.btLimparActionPerformed(evt);
             
-            JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso.", "Usuário", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fornecedor salvo com sucesso.", "Fornecedor", JOptionPane.INFORMATION_MESSAGE);
         } 
         catch (Exception vExcecao) 
         {
