@@ -1,6 +1,5 @@
 package br.com.facdombosco.progc.app.main;
 
-import br.com.facdombosco.progc.app.vendas.GUIVendas;
 import br.com.facdombosco.progc.app.vendas.GUIProduto;
 import br.com.facdombosco.progc.app.acessos.GUIUsuario;
 import br.com.facdombosco.progc.app.compras.frmCadastroFormaPagamento;
@@ -8,6 +7,7 @@ import br.com.facdombosco.progc.app.compras.frmCadastroFornecedor;
 import br.com.facdombosco.progc.app.compras.frmConsultaRequisicao;
 import br.com.facdombosco.progc.app.compras.frmRequisicaoPedido;
 import br.com.facdombosco.progc.app.suprimentos.GUIEstoqueItem;
+import br.com.facdombosco.progc.app.vendas.GUIVendas;
 import br.com.facdombosco.progc.dvo.acessos.Usuario;
 import br.com.facdombosco.progc.reportsGeneral.HibernateReport;
 import br.com.facdombosco.progc.service.suprimentos.EstoqueItemService;
@@ -92,17 +92,22 @@ public class GUIPrincipal extends javax.swing.JFrame {
         jLabel2.setBounds(0, 0, 1250, 740);
         desktopPane.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        lHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lHora.setFont(new java.awt.Font("Tahoma", 1, 18));
         lHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lHora.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Desenvolvido pelo Grupo de Programação C - Faculdade Dom Bosco de Porto Alegre");
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         menuVendas.setText("Vendas");
+        menuVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVendasActionPerformed(evt);
+            }
+        });
 
         pedidoVenda_Vendas.setText("Pedido de Venda");
         pedidoVenda_Vendas.addActionListener(new java.awt.event.ActionListener() {
@@ -400,6 +405,15 @@ public class GUIPrincipal extends javax.swing.JFrame {
             vRequisicaoPedido.setVisible(true);
         }
     }//GEN-LAST:event_miRequisicaoPedidoActionPerformed
+
+    private void menuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVendasActionPerformed
+        if((guivendas == null)||(!guivendas.isVisible())){
+            guivendas = new GUIVendas();
+            desktopPane.add(guivendas);
+            guivendas.setPosicao();
+            guivendas.setVisible(true);
+        }
+    }//GEN-LAST:event_menuVendasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane desktopPane;
