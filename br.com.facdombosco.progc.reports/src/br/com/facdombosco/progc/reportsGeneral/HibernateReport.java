@@ -15,42 +15,19 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class HibernateReport {
     
-    public static void abrirReport() throws JRException {
-        JasperReport report = JasperCompileManager.compileReport(
-                    "C:/Documents and Settings/dsv.php/Desktop/programacaoc20121/trunk/br.com.facdombosco.progc.reports/ReportsSuprimentos/relatorioUsuarios.jrxml");
-    }
+   public static void abrirReport(String nomeArquivo, List listObjetos, Map parametros) throws JRException {
 
-    public static void abrirReport(String nomeArquivo, List listObjetos, Map parametros) throws JRException {
-
-        /*JasperViewer ver = null;
-        JasperPrint jasper = null;
-
-        JRBeanCollectionDataSource jrRS = new JRBeanCollectionDataSource(listObjetos);
-        jasper = JasperFillManager.fillReport(nomeArquivo, parametros, jrRS);
-
-        JasperViewer ver = null;
-        ver = new JasperViewer(jasper,false);
-        ver.setTitle("Relatório");
-        ver.setExtendedState(ver.MAXIMIZED_BOTH);
-        ver.setFocusable(true);
-        ver.setExtendedState(ver.MAXIMIZED_BOTH);
-        ver.setVisible(true);
-        ver.setExtendedState(ver.MAXIMIZED_BOTH);
-        ver.requestFocus();
-        ver.setAlwaysOnTop(true);*/
-        try {
-            //JasperReport report = JasperCompileManager.compileReport(nomeArquivo);
-            
-            JasperReport report = JasperCompileManager.compileReport("C:/Documents and Settings/dsv.php/Desktop/programacaoc20121/trunk/br.com.facdombosco.progc.reports/ReportsSuprimentos/relatorioUsuarios.jrxml");
+       try {
+            JasperReport report = JasperCompileManager.compileReport(nomeArquivo);
                                     
             JasperPrint print = JasperFillManager.fillReport(report, null,
                                 new JRBeanCollectionDataSource(listObjetos));
-            JasperExportManager.exportReportToPdfFile(print, nomeArquivo);
-            JasperExportManager.exportReportToHtmlFile(print, nomeArquivo);
+            JasperExportManager.exportReportToPdfFile(print, nomeArquivo + ".pdf");
+            JasperExportManager.exportReportToHtmlFile(print, nomeArquivo + ".html");
             JRXlsExporter exporterXLS = new JRXlsExporter();
             exporterXLS.setParameter(JRXlsExporterParameter.JASPER_PRINT, print);
             
-            exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_STREAM, new FileOutputStream(new File(nomeArquivo)));
+            exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_STREAM, new FileOutputStream(new File(nomeArquivo + ".xls")));
             exporterXLS.exportReport();
             
             JasperViewer ver = null;
@@ -70,7 +47,6 @@ public class HibernateReport {
     }
 
     public static void abrirReport(String nomeArquivo, List listObjetos) throws JRException {
-
         HibernateReport.abrirReport(nomeArquivo, listObjetos, new HashMap());
     }
 }
