@@ -1,8 +1,15 @@
 package br.com.facdombosco.progc.app.compras;
 
 import br.com.facdombosco.progc.framework.controls.FixedLengthDocument;
+import br.com.facdombosco.progc.framework.utils.MessageHelper;
 import java.awt.Dimension;
 import br.com.facdombosco.progc.service.compras.FornecedorService;
+import br.com.facdombosco.progc.dvo.compras.Fornecedor;
+import br.com.facdombosco.progc.framework.utils.StringUtils;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class frmCadastroFornecedor extends javax.swing.JInternalFrame
 {
@@ -10,9 +17,10 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     {
         initComponents();
         LimitarTexto();
+        this.btExcluir.setEnabled(false);
     }
 
-    public void setPosicao()
+    public void AdaptarPosicao()
     {
         Dimension vDimensao = this.getDesktopPane().getSize();
         
@@ -23,7 +31,6 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     {
          txtNome.setDocument(new FixedLengthDocument(30));
          txtCnpj.setDocument(new FixedLengthDocument(11));
-         txtEndereco.setDocument(new FixedLengthDocument(50));
          txtCidade.setDocument(new FixedLengthDocument(30));
          txtEmail.setDocument(new FixedLengthDocument(30));
     }
@@ -32,11 +39,48 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     {
         txtNome.setText("");
         txtCnpj.setText("");
-        txtEndereco.setText("");
         txtCidade.setText("");
-        txtEstado.setSelectedIndex(0);
         txtTelefone.setText("");
         txtEmail.setText("");
+    }
+    
+    private Dictionary<String, Object> PesquisarDicionario() 
+    {
+        Dictionary<String, Object> properties = new Hashtable<String, Object>();
+
+        if (!this.txtCodigo.getText().equals(""))
+            properties.put("idFornecedor", Integer.parseInt(this.txtCodigo.getText()));
+
+        if (!this.txtNome.getText().equals(""))
+            properties.put("nome", this.txtNome.getText());
+
+        if (!this.txtCnpj.getText().equals(""))
+            properties.put("cnpj", this.txtCnpj.getText());
+
+        return properties;
+    }
+    
+    private Fornecedor PersistenciarObjeto() 
+    {
+        Fornecedor vFornecedor = new Fornecedor();
+        
+        vFornecedor.setNome(this.txtNome.getText());
+        vFornecedor.setCnpj(Integer.parseInt(this.txtCnpj.getText()));
+        vFornecedor.setCidade(this.txtCidade.getText());
+        vFornecedor.setTelefone(this.txtTelefone.getText());
+        vFornecedor.setEmail(this.txtEmail.getText());
+        
+        return vFornecedor;
+    }
+    
+    private void CarregarFormulario(Fornecedor vFornecedor) 
+    {
+        this.txtCodigo.setText(String.valueOf(vFornecedor.getIdFornecedor()));
+        this.txtNome.setText(String.valueOf(vFornecedor.getNome()));
+        this.txtCnpj.setText(String.valueOf(vFornecedor.getCnpj()));
+        this.txtCidade.setText(String.valueOf(vFornecedor.getCidade()));
+        this.txtTelefone.setText(String.valueOf(vFornecedor.getTelefone()));
+        this.txtEmail.setText(String.valueOf(vFornecedor.getEmail()));
     }
     
     @SuppressWarnings("unchecked")
@@ -51,23 +95,21 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         lblEmail = new javax.swing.JLabel();
         lblTelefone = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JFormattedTextField();
-        txtEstado = new javax.swing.JComboBox();
-        lblEstado = new javax.swing.JLabel();
         lblCidade = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
-        txtEndereco = new javax.swing.JTextField();
-        lblEndereco = new javax.swing.JLabel();
         lblCnpj = new javax.swing.JLabel();
         txtCnpj = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         btLimpar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
+        txtCodigo = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JLabel();
         jpFornecedorCadastrado = new javax.swing.JPanel();
         spCadastroFornecedor = new javax.swing.JScrollPane();
         tbCadastroFornecedor = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRO DE FORNECEDORES");
 
         jpCadastroFornecedor.setBackground(new java.awt.Color(0, 0, 0));
@@ -94,6 +136,11 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         btSalvar.setMnemonic('s');
         btSalvar.setText("SALVAR");
         btSalvar.setName("btSalvar"); // NOI18N
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
 
         txtEmail.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         txtEmail.setName("txtEmail"); // NOI18N
@@ -117,15 +164,6 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         txtTelefone.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         txtTelefone.setName("txtTelefone"); // NOI18N
 
-        txtEstado.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        txtEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AC", "AL", "DF", "GO", "MG", "RJ", "RO", "RS", "SC", "SE", "SP", "TO" }));
-        txtEstado.setName("txtEstado"); // NOI18N
-
-        lblEstado.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
-        lblEstado.setForeground(new java.awt.Color(0, 0, 153));
-        lblEstado.setText("Estado");
-        lblEstado.setName("lblEstado"); // NOI18N
-
         lblCidade.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
         lblCidade.setForeground(new java.awt.Color(0, 0, 153));
         lblCidade.setText("Cidade");
@@ -133,14 +171,6 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
 
         txtCidade.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         txtCidade.setName("txtCidade"); // NOI18N
-
-        txtEndereco.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        txtEndereco.setName("txtEndereco"); // NOI18N
-
-        lblEndereco.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
-        lblEndereco.setForeground(new java.awt.Color(0, 0, 153));
-        lblEndereco.setText("Endereço");
-        lblEndereco.setName("lblEndereco"); // NOI18N
 
         lblCnpj.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
         lblCnpj.setForeground(new java.awt.Color(0, 0, 153));
@@ -174,6 +204,20 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
         btExcluir.setMnemonic('e');
         btExcluir.setText("EXCLUIR");
         btExcluir.setName("btExcluir");
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
+
+        txtCodigo.setEditable(false);
+        txtCodigo.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtCodigo.setName("txtCodigo");
+
+        lblCodigo.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblCodigo.setForeground(new java.awt.Color(0, 0, 153));
+        lblCodigo.setText("Código");
+        lblCodigo.setName("lblCodigo");
 
         javax.swing.GroupLayout jpIncluirFornecedorLayout = new javax.swing.GroupLayout(jpIncluirFornecedor);
         jpIncluirFornecedor.setLayout(jpIncluirFornecedorLayout);
@@ -182,42 +226,48 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
             .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblTelefone)
+                    .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
                         .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCidade)
-                            .addComponent(lblEndereco)
-                            .addComponent(lblEstado)))
-                    .addComponent(lblNome)
-                    .addComponent(lblCnpj)
-                    .addComponent(lblEmail))
-                .addGap(18, 18, 18)
-                .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(lblCidade))
+                            .addComponent(lblNome)
+                            .addComponent(lblCnpj)
+                            .addComponent(lblCodigo))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCidade)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
+                        .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
+                                .addComponent(lblTelefone)
+                                .addGap(1, 1, 1))
+                            .addComponent(lblEmail))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpIncluirFornecedorLayout.createSequentialGroup()
                         .addComponent(btSalvar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(btListar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))
-                    .addComponent(txtCidade)
-                    .addComponent(txtEndereco)
-                    .addComponent(txtEmail)
-                    .addComponent(txtTelefone)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btListar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
-
-        jpIncluirFornecedorLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtCnpj, txtEstado, txtTelefone});
-
         jpIncluirFornecedorLayout.setVerticalGroup(
             jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIncluirFornecedorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCodigo)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome))
@@ -225,19 +275,11 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCnpj))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEndereco)
-                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCidade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefone)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,7 +287,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmail))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addGroup(jpIncluirFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btListar)
@@ -254,7 +296,7 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
                 .addContainerGap())
         );
 
-        jpIncluirFornecedorLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtCidade, txtCnpj, txtEmail, txtEndereco, txtEstado, txtNome, txtTelefone});
+        jpIncluirFornecedorLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtCidade, txtCnpj, txtEmail, txtNome, txtTelefone});
 
         jpFornecedorCadastrado.setBackground(new java.awt.Color(0, 0, 0));
         jpFornecedorCadastrado.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "FORNECEDOR(ES) CADASTRADO(S)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Console", 1, 14), new java.awt.Color(0, 0, 153))); // NOI18N
@@ -274,6 +316,11 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
             }
         ));
         tbCadastroFornecedor.setName("tbCadastroFornecedor"); // NOI18N
+        tbCadastroFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbCadastroFornecedorMouseClicked(evt);
+            }
+        });
         spCadastroFornecedor.setViewportView(tbCadastroFornecedor);
 
         javax.swing.GroupLayout jpFornecedorCadastradoLayout = new javax.swing.GroupLayout(jpFornecedorCadastrado);
@@ -332,8 +379,62 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListarActionPerformed
-        FornecedorService vServicoFornecedor = new FornecedorService();
+        if (StringUtils.isNumeric(this.txtCodigo.getText()))
+        {
+            FornecedorService vServicoFornecedor = new FornecedorService();
+            List<Fornecedor> vListaFornecedor = vServicoFornecedor.findAll(this.PesquisarDicionario());
+            FornecedorTableModel vTabelaModeloFornecedor = new FornecedorTableModel(vListaFornecedor);
+            
+            this.tbCadastroFornecedor.setModel(vTabelaModeloFornecedor);
+        }
+        else
+            JOptionPane.showMessageDialog(this, "O código digitado deve ser númerico!");
     }//GEN-LAST:event_btListarActionPerformed
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        try 
+        {
+            FornecedorService vServicoFornecedor = new FornecedorService();
+            
+            vServicoFornecedor.save(this.PersistenciarObjeto());
+            this.btLimparActionPerformed(evt);
+            
+            JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso.", "Usuário", JOptionPane.INFORMATION_MESSAGE);
+        } 
+        catch (Exception vExcecao) 
+        {
+            JOptionPane.showMessageDialog(this, vExcecao.getMessage());
+        }
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        try 
+        {
+            if (JOptionPane.showConfirmDialog(this, "Você deseja excluir " + txtNome.getText() + "?", "Fornecedor", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0)
+            {
+                new FornecedorService().delete(this.PersistenciarObjeto());
+                
+                this.btLimparActionPerformed(evt);
+                this.btExcluir.setEnabled(false);
+            }
+        } 
+        catch (Exception ex) 
+        {
+            MessageHelper.showError(ex.getMessage());
+        }
+    }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void tbCadastroFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCadastroFornecedorMouseClicked
+        if (this.tbCadastroFornecedor.getSelectedRow() != -1) 
+        {
+            this.LimparTexto();
+            
+            FornecedorTableModel vTabelaModeloFornecedor = (FornecedorTableModel)this.tbCadastroFornecedor.getModel();
+            
+            this.CarregarFormulario(vTabelaModeloFornecedor.getFornecedores().get(this.tbCadastroFornecedor.getSelectedRow()));
+            this.btExcluir.setEnabled(true);
+        }
+    }//GEN-LAST:event_tbCadastroFornecedorMouseClicked
 
     /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -353,18 +454,16 @@ public class frmCadastroFornecedor extends javax.swing.JInternalFrame
     private javax.swing.JPanel jpIncluirFornecedor;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblCnpj;
+    private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblEndereco;
-    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JScrollPane spCadastroFornecedor;
     private javax.swing.JTable tbCadastroFornecedor;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCnpj;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JFormattedTextField txtEmail;
-    private javax.swing.JTextField txtEndereco;
-    private javax.swing.JComboBox txtEstado;
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
