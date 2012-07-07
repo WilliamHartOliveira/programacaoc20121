@@ -6,6 +6,7 @@ import br.com.facdombosco.progc.framework.utils.StringUtils;
 import br.com.facdombosco.progc.service.compras.FormaPagamentoService;
 import br.com.facdombosco.progc.framework.utils.MessageHelper;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
@@ -101,6 +102,7 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
         btListar = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
         lblCodigo = new javax.swing.JLabel();
+        btFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRO DAS FORMAS DE PAGAMENTO");
@@ -154,20 +156,20 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
         jpIncluirFormaPagamento.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "INCLUIR FORMA DE PAGAMENTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 1, 14), new java.awt.Color(0, 0, 153))); // NOI18N
         jpIncluirFormaPagamento.setName("jpIncluirFormaPagamento"); // NOI18N
 
-        lblNome.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblNome.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblNome.setForeground(new java.awt.Color(0, 0, 153));
         lblNome.setText("Nome");
         lblNome.setName("lblNome"); // NOI18N
 
-        txtNome.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtNome.setFont(new java.awt.Font("Lucida Sans", 1, 14));
         txtNome.setName("txtNome"); // NOI18N
 
-        lblQuantidadeParcela.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblQuantidadeParcela.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblQuantidadeParcela.setForeground(new java.awt.Color(0, 0, 153));
         lblQuantidadeParcela.setText("Quantidade de parcelas");
         lblQuantidadeParcela.setName("lblQuantidadeParcela"); // NOI18N
 
-        txtQuantidadeParcela.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtQuantidadeParcela.setFont(new java.awt.Font("Lucida Sans", 1, 14));
         txtQuantidadeParcela.setName("txtQuantidadeParcela"); // NOI18N
 
         btSalvar.setBackground(new java.awt.Color(255, 255, 255));
@@ -192,19 +194,19 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
             }
         });
 
-        lblQuantidadeDiaParcela.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblQuantidadeDiaParcela.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblQuantidadeDiaParcela.setForeground(new java.awt.Color(0, 0, 153));
         lblQuantidadeDiaParcela.setText("Quantidade de dias p/ parcela");
         lblQuantidadeDiaParcela.setName("lblQuantidadeDiaParcela"); // NOI18N
 
-        txtQuantidadeDiaParcela.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        txtQuantidadeDiaParcela.setFont(new java.awt.Font("Lucida Sans", 1, 14));
         txtQuantidadeDiaParcela.setName("txtQuantidadeDiaParcela"); // NOI18N
 
         btLimpar.setBackground(new java.awt.Color(255, 255, 255));
         btLimpar.setForeground(new java.awt.Color(0, 0, 153));
         btLimpar.setMnemonic('l');
         btLimpar.setText("LIMPAR");
-        btLimpar.setName("btLimpar");
+        btLimpar.setName("btLimpar"); // NOI18N
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btLimparActionPerformed(evt);
@@ -215,7 +217,7 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
         btListar.setForeground(new java.awt.Color(0, 0, 153));
         btListar.setMnemonic('r');
         btListar.setText("LISTAR");
-        btListar.setName("btListar");
+        btListar.setName("btListar"); // NOI18N
         btListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btListarActionPerformed(evt);
@@ -223,20 +225,31 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
         });
 
         txtCodigo.setEditable(false);
-        txtCodigo.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        txtCodigo.setName("txtCodigo");
+        txtCodigo.setFont(new java.awt.Font("Lucida Sans", 1, 14));
+        txtCodigo.setName("txtCodigo"); // NOI18N
 
-        lblCodigo.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        lblCodigo.setFont(new java.awt.Font("Lucida Console", 1, 14));
         lblCodigo.setForeground(new java.awt.Color(0, 0, 153));
         lblCodigo.setText("Código");
-        lblCodigo.setName("lblCodigo");
+        lblCodigo.setName("lblCodigo"); // NOI18N
+
+        btFechar.setBackground(new java.awt.Color(255, 255, 255));
+        btFechar.setForeground(new java.awt.Color(0, 0, 153));
+        btFechar.setMnemonic('f');
+        btFechar.setText("FECHAR");
+        btFechar.setName("btFechar"); // NOI18N
+        btFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpIncluirFormaPagamentoLayout = new javax.swing.GroupLayout(jpIncluirFormaPagamento);
         jpIncluirFormaPagamento.setLayout(jpIncluirFormaPagamentoLayout);
         jpIncluirFormaPagamentoLayout.setHorizontalGroup(
             jpIncluirFormaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIncluirFormaPagamentoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jpIncluirFormaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jpIncluirFormaPagamentoLayout.createSequentialGroup()
                         .addComponent(lblCodigo)
@@ -246,24 +259,26 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
                         .addComponent(lblQuantidadeParcela)
                         .addGap(18, 18, 18)
                         .addComponent(txtQuantidadeParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpIncluirFormaPagamentoLayout.createSequentialGroup()
-                        .addComponent(btSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btListar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpIncluirFormaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIncluirFormaPagamentoLayout.createSequentialGroup()
-                            .addComponent(lblQuantidadeDiaParcela)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtQuantidadeDiaParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpIncluirFormaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jpIncluirFormaPagamentoLayout.createSequentialGroup()
                             .addComponent(lblNome)
                             .addGap(18, 18, 18)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(2, 2, 2))))
+                            .addGap(2, 2, 2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIncluirFormaPagamentoLayout.createSequentialGroup()
+                            .addComponent(btSalvar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btListar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpIncluirFormaPagamentoLayout.createSequentialGroup()
+                            .addComponent(lblQuantidadeDiaParcela)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtQuantidadeDiaParcela, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(25, 25, 25))
         );
         jpIncluirFormaPagamentoLayout.setVerticalGroup(
@@ -285,8 +300,9 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
                 .addGroup(jpIncluirFormaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCodigo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jpIncluirFormaPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btExcluir)
                     .addComponent(btLimpar)
@@ -334,16 +350,11 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListarActionPerformed
-        if (StringUtils.isNumeric(this.txtCodigo.getText()))
-        {
-            FormaPagamentoService vServicoFornecedor = new FormaPagamentoService();
-            List<FormaPagamento> vFormaPagamento = vServicoFornecedor.findAll(this.PesquisarDicionario());
-            FormaPagamentoTableModel vTabelaModeloFormaPagamento = new FormaPagamentoTableModel(vFormaPagamento);
-            
-            this.tbCadastroFormaPagamento.setModel(vTabelaModeloFormaPagamento);
-        }
-        else
-            JOptionPane.showMessageDialog(this, "O código digitado deve ser númerico!");
+        FormaPagamentoService vServicoFornecedor = new FormaPagamentoService();
+        List<FormaPagamento> vFormaPagamento = vServicoFornecedor.findAll(this.PesquisarDicionario());
+        FormaPagamentoTableModel vTabelaModeloFormaPagamento = new FormaPagamentoTableModel(vFormaPagamento);
+
+        this.tbCadastroFormaPagamento.setModel(vTabelaModeloFormaPagamento);
     }//GEN-LAST:event_btListarActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
@@ -391,6 +402,10 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
         }
     }//GEN-LAST:event_tbCadastroFormaPagamentoMouseClicked
 
+    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
+        this.setVisible(false);
+}//GEN-LAST:event_btFecharActionPerformed
+
     /*public static void main(String args[]) 
     {
         java.awt.EventQueue.invokeLater(new Runnable() 
@@ -404,6 +419,7 @@ public class frmCadastroFormaPagamento extends javax.swing.JInternalFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btExcluir;
+    private javax.swing.JButton btFechar;
     private javax.swing.JButton btLimpar;
     private javax.swing.JButton btListar;
     private javax.swing.JButton btSalvar;

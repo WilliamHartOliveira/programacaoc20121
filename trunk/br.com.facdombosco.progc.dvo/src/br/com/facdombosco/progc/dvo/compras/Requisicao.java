@@ -1,10 +1,12 @@
 package br.com.facdombosco.progc.dvo.compras;
-// Generated 30/06/2012 11:42:13 by Hibernate Tools 3.2.1.GA
+// Generated 07/07/2012 11:47:36 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,25 +22,24 @@ import javax.persistence.TemporalType;
 public class Requisicao  implements java.io.Serializable {
 
 
-     private int idRequisicao;
+     private Integer idRequisicao;
      private Date dataHora;
 
     public Requisicao() {
     }
 
-    public Requisicao(int idRequisicao, Date dataHora) {
-       this.idRequisicao = idRequisicao;
+    public Requisicao(Date dataHora) {
        this.dataHora = dataHora;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
     
     @Column(name="idRequisicao", unique=true, nullable=false)
-    public int getIdRequisicao() {
+    public Integer getIdRequisicao() {
         return this.idRequisicao;
     }
     
-    public void setIdRequisicao(int idRequisicao) {
+    public void setIdRequisicao(Integer idRequisicao) {
         this.idRequisicao = idRequisicao;
     }
     @Temporal(TemporalType.TIMESTAMP)

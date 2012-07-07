@@ -1,9 +1,11 @@
 package br.com.facdombosco.progc.dvo.compras;
-// Generated 30/06/2012 11:42:13 by Hibernate Tools 3.2.1.GA
+// Generated 07/07/2012 11:47:36 by Hibernate Tools 3.2.1.GA
 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 public class RequisicaoProduto  implements java.io.Serializable {
 
 
-     private int idRequisicaoProduto;
+     private Integer idRequisicaoProduto;
      private int idRequisicao;
      private int idProduto;
      private int quantidade;
@@ -25,21 +27,20 @@ public class RequisicaoProduto  implements java.io.Serializable {
     public RequisicaoProduto() {
     }
 
-    public RequisicaoProduto(int idRequisicaoProduto, int idRequisicao, int idProduto, int quantidade) {
-       this.idRequisicaoProduto = idRequisicaoProduto;
+    public RequisicaoProduto(int idRequisicao, int idProduto, int quantidade) {
        this.idRequisicao = idRequisicao;
        this.idProduto = idProduto;
        this.quantidade = quantidade;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
     
     @Column(name="idRequisicaoProduto", unique=true, nullable=false)
-    public int getIdRequisicaoProduto() {
+    public Integer getIdRequisicaoProduto() {
         return this.idRequisicaoProduto;
     }
     
-    public void setIdRequisicaoProduto(int idRequisicaoProduto) {
+    public void setIdRequisicaoProduto(Integer idRequisicaoProduto) {
         this.idRequisicaoProduto = idRequisicaoProduto;
     }
     
