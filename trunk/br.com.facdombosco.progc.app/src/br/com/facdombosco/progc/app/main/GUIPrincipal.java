@@ -10,6 +10,7 @@ import br.com.facdombosco.progc.app.suprimentos.GUIEstoqueItem;
 import br.com.facdombosco.progc.app.vendas.GUIVendas;
 import br.com.facdombosco.progc.dvo.acessos.Usuario;
 import br.com.facdombosco.progc.reportsGeneral.HibernateReport;
+import br.com.facdombosco.progc.service.acessos.UsuarioService;
 import br.com.facdombosco.progc.service.suprimentos.EstoqueItemService;
 import br.com.facdombosco.progc.service.vendas.ProdutoService;
 import java.text.SimpleDateFormat;
@@ -335,8 +336,6 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void itemDeMenuRelatorioEstoqueItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioEstoqueItemActionPerformed
         try {
-            HibernateReport.abrirReport();
-            
             HibernateReport.abrirReport("../br.com.facdombosco.progc.reports/ReportsSuprimentos/reportEstoqueItem.jrxml",
                                         new EstoqueItemService().findAll());
         } catch (JRException ex) {
@@ -355,8 +354,8 @@ public class GUIPrincipal extends javax.swing.JFrame {
 
     private void itemDeMenuRelatorioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDeMenuRelatorioUsuarioActionPerformed
         try {
-            HibernateReport.abrirReport("../br.com.facdombosco.progc.reports/ReportsAcesps/reportUsuario.jrxml",
-                                        new ProdutoService().findAll());
+            HibernateReport.abrirReport("../br.com.facdombosco.progc.reports/ReportsAcessos/reportUsuario.jrxml",
+                                        new UsuarioService().findAll());
         } catch (JRException ex) {
             Logger.getLogger(GUIPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

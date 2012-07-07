@@ -101,6 +101,12 @@ public class Produto  implements java.io.Serializable {
     public void setItemVendas(Set itemVendas) {
         this.itemVendas = itemVendas;
     }
+
+    @Override
+    public String toString()
+    {
+        return this.getNome();
+    }
 }
 
 

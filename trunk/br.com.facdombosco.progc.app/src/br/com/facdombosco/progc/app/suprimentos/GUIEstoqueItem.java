@@ -224,6 +224,9 @@ public class GUIEstoqueItem extends javax.swing.JInternalFrame {
         if(!this.txtId_Produto.getText().isEmpty())
             estoqueItem.setProduto(new ProdutoService().findById(Integer.parseInt(this.txtId_Produto.getText())));
 
+         if (this.edicao)
+            estoqueItem.setIdEstoqueItem(Integer.parseInt(this.txtCodigo_EstoqueItem.getText()));
+
         return estoqueItem;
     }
 
@@ -263,8 +266,11 @@ public class GUIEstoqueItem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new EstoqueItemService().delete(this.carregarObjetoPersistencia());
-        this.jButton2ActionPerformed(evt);
+        if(JOptionPane.showConfirmDialog(this, "Você deseja excluir este item de estoque?","Estoque Item",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0){
+            new EstoqueItemService().delete(this.carregarObjetoPersistencia());
+            this.jButton2ActionPerformed(evt);
+            this.jButton3ActionPerformed(evt);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void txtQtd_ProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtd_ProdutoKeyPressed
