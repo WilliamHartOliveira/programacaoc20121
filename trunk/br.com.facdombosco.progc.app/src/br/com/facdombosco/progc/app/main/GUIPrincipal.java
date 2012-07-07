@@ -374,7 +374,7 @@ public class GUIPrincipal extends javax.swing.JFrame {
             vCadastroFornecedor = new frmCadastroFornecedor();
             
             desktopPane.add(vCadastroFornecedor);
-            vCadastroFornecedor.setPosicao();
+            vCadastroFornecedor.AdaptarPosicao();
             vCadastroFornecedor.setVisible(true);
         }
     }//GEN-LAST:event_miCadastroFornecedorActionPerformed
