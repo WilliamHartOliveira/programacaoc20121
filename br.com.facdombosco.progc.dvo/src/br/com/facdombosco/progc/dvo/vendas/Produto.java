@@ -44,6 +44,13 @@ public class Produto  implements java.io.Serializable {
        this.fornecedor = fornecedor;
        this.itemVendas = itemVendas;
     }
+    
+    public Produto(ItemVenda itemVenda, String nome, Float valor) {
+       this.itemVenda = itemVenda;
+       this.nome = nome;
+       this.valor = valor;
+       this.fornecedor.setIdFornecedor(1);
+    }
    
     @Id @GeneratedValue(strategy=IDENTITY)
     @Column(name="idProduto", unique=true, nullable=false)

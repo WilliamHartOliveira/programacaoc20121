@@ -31,7 +31,6 @@
     <mapping class="br.com.facdombosco.progc.dvo.compras.FormaPagamento"/>
     <mapping class="br.com.facdombosco.progc.dvo.compras.Requisicao"/>
     <mapping class="br.com.facdombosco.progc.dvo.compras.RequisicaoProduto"/>
-    <mapping class="br.com.facdombosco.progc.dvo.compras.Teste"/>
     
   </session-factory>
 </hibernate-configuration>

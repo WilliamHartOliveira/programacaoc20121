@@ -3,11 +3,11 @@ package br.com.facdombosco.progc.app.compras;
 import br.com.facdombosco.progc.app.vendas.ProdutoTableModel;
 import br.com.facdombosco.progc.dvo.compras.FormaPagamento;
 import br.com.facdombosco.progc.dvo.compras.Fornecedor;
-import br.com.facdombosco.progc.dvo.compras.Teste;
+////import br.com.facdombosco.progc.dvo.compras.Teste;
 import br.com.facdombosco.progc.dvo.vendas.Produto;
 import br.com.facdombosco.progc.service.compras.FormaPagamentoService;
 import br.com.facdombosco.progc.service.compras.FornecedorService;
-import br.com.facdombosco.progc.service.compras.TesteService;
+//import br.com.facdombosco.progc.service.compras.TesteService;
 import br.com.facdombosco.progc.service.vendas.ProdutoService;
 import java.awt.Dimension;
 import java.util.Dictionary;
@@ -58,11 +58,11 @@ public class frmFinalizarPedido extends javax.swing.JInternalFrame
 
     public void ListarProduto()
     {
-        TesteService vServicoTeste = new TesteService();
-        List<Teste> vListaTeste = vServicoTeste.findAll(this.PesquisarDicionario());
-        TesteTableModel vTabelaModeloTeste = new TesteTableModel(vListaTeste);
+////        TesteService vServicoTeste = new TesteService();
+////        List<Teste> vListaTeste = vServicoTeste.findAll(this.PesquisarDicionario());
+////        TesteTableModel vTabelaModeloTeste = new TesteTableModel(vListaTeste);
 
-        this.tbProduto.setModel(vTabelaModeloTeste);
+//        this.tbProduto.setModel(vTabelaModeloTeste);
     }
 
     @SuppressWarnings("unchecked")
