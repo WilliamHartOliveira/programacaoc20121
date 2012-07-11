@@ -11,13 +11,16 @@
 
 package br.com.facdombosco.progc.app.vendas;
 
-import br.com.facdombosco.progc.dvo.vendas.Produto;
+import br.com.facdombosco.progc.dvo.vendas.*;
+import br.com.facdombosco.progc.service.vendas.ClienteService;
 import br.com.facdombosco.progc.service.vendas.ProdutoService;
+import br.com.facdombosco.progc.service.vendas.VendaService;
+import br.com.facdombosco.progc.service.vendas.VendedorService;
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 /**
  *
@@ -25,7 +28,8 @@ import java.util.List;
  */
 public class GUIVendas extends javax.swing.JInternalFrame {
     List<Produto> listProduto = new ArrayList<Produto>();
-    int bool = 0;
+    List<ItemVenda> listItem = new ArrayList<ItemVenda>();
+    
     /** Creates new form GUIVendas */
     public GUIVendas() {
         initComponents();
@@ -61,6 +65,8 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         txtNotaNumero = new javax.swing.JTextField();
         btnCodVendedor = new javax.swing.JButton();
         btnCodCliente = new javax.swing.JButton();
+        jlAvisoCli = new javax.swing.JLabel();
+        jlAvisoVend = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtCodProduto = new javax.swing.JTextField();
@@ -68,11 +74,11 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         btnAddProduto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jSpinner1 = new javax.swing.JSpinner();
+        jsQuantidade = new javax.swing.JSpinner();
         btnCodProduto = new javax.swing.JButton();
         btnRemoveProduto = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jlTotal = new javax.swing.JLabel();
         btnNovo = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -90,27 +96,39 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         txtCodigo.setName("txtCodigo"); // NOI18N
 
         btnPrimeiro.setText("|<");
+        btnPrimeiro.setEnabled(false);
         btnPrimeiro.setName("btnPrimeiro"); // NOI18N
 
         btnAnterior.setText("<");
+        btnAnterior.setEnabled(false);
         btnAnterior.setName("btnAnterior"); // NOI18N
 
         btnProximo.setText(">");
+        btnProximo.setEnabled(false);
         btnProximo.setName("btnProximo"); // NOI18N
 
         btnUltimo.setText(">|");
+        btnUltimo.setEnabled(false);
         btnUltimo.setName("btnUltimo"); // NOI18N
 
         jLabel2.setText("Código Cliente:");
         jLabel2.setName("jLabel2"); // NOI18N
 
-        txtCodCliente.setEditable(false);
         txtCodCliente.setEnabled(false);
         txtCodCliente.setName("txtCodCliente"); // NOI18N
+        txtCodCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodClienteKeyTyped(evt);
+            }
+        });
 
-        txtCodVendedor.setEditable(false);
         txtCodVendedor.setEnabled(false);
         txtCodVendedor.setName("txtCodVendedor"); // NOI18N
+        txtCodVendedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodVendedorKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Código Vendedor:");
         jLabel3.setName("jLabel3"); // NOI18N
@@ -118,6 +136,11 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         cbxFinalizado.setText("Finalizado ?");
         cbxFinalizado.setEnabled(false);
         cbxFinalizado.setName("cbxFinalizado"); // NOI18N
+        cbxFinalizado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbxFinalizadoMouseClicked(evt);
+            }
+        });
 
         jLabel4.setText("Nota Nº:");
         jLabel4.setName("jLabel4"); // NOI18N
@@ -128,10 +151,24 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         btnCodVendedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/facdombosco/progc/app/icons/lupa.png"))); // NOI18N
         btnCodVendedor.setEnabled(false);
         btnCodVendedor.setName("btnCodVendedor"); // NOI18N
+        btnCodVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCodVendedorActionPerformed(evt);
+            }
+        });
 
         btnCodCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/facdombosco/progc/app/icons/lupa.png"))); // NOI18N
         btnCodCliente.setEnabled(false);
         btnCodCliente.setName("btnCodCliente"); // NOI18N
+        btnCodCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCodClienteActionPerformed(evt);
+            }
+        });
+
+        jlAvisoCli.setName("jlAvisoCli");
+
+        jlAvisoVend.setName("jlAvisoVend");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,11 +192,14 @@ public class GUIVendas extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxFinalizado, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(cbxFinalizado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtCodVendedor))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCodVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCodVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlAvisoVend))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnPrimeiro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,7 +208,10 @@ public class GUIVendas extends javax.swing.JInternalFrame {
                         .addComponent(btnProximo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUltimo))
-                    .addComponent(btnCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlAvisoCli)))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -184,20 +227,24 @@ public class GUIVendas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtNotaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtNotaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
+                            .addComponent(btnCodCliente)
+                            .addComponent(jlAvisoCli))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addComponent(btnCodCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCodVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3))
-                    .addComponent(btnCodVendedor))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtCodVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3))
+                            .addComponent(btnCodVendedor)))
+                    .addComponent(jlAvisoVend))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbxFinalizado))
         );
@@ -208,9 +255,13 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         jLabel5.setText("Código do Produto:");
         jLabel5.setName("jLabel5"); // NOI18N
 
-        txtCodProduto.setEditable(false);
         txtCodProduto.setEnabled(false);
         txtCodProduto.setName("txtCodProduto"); // NOI18N
+        txtCodProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodProdutoKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("Quantidade:");
         jLabel6.setName("jLabel6"); // NOI18N
@@ -231,14 +282,14 @@ public class GUIVendas extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Cód Item", "Descrição", "Quantidade", "Valor Unitário", "Sub-Total"
+                "Cód Item", "Descrição", "Valor Unitário"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -253,12 +304,22 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         jTable1.setName("jTable1"); // NOI18N
         jScrollPane1.setViewportView(jTable1);
 
-        jSpinner1.setEnabled(false);
-        jSpinner1.setName("jSpinner1"); // NOI18N
+        jsQuantidade.setEnabled(false);
+        jsQuantidade.setName("jsQuantidade"); // NOI18N
+        jsQuantidade.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsQuantidadeStateChanged(evt);
+            }
+        });
 
         btnCodProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/facdombosco/progc/app/icons/lupa.png"))); // NOI18N
         btnCodProduto.setEnabled(false);
         btnCodProduto.setName("btnCodProduto"); // NOI18N
+        btnCodProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCodProdutoActionPerformed(evt);
+            }
+        });
 
         btnRemoveProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/facdombosco/progc/app/icons/remove.png"))); // NOI18N
         btnRemoveProduto.setEnabled(false);
@@ -275,15 +336,14 @@ public class GUIVendas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSpinner1)
+                    .addComponent(jsQuantidade)
                     .addComponent(txtCodProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(292, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoveProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -301,7 +361,7 @@ public class GUIVendas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jsQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnRemoveProduto)
                         .addComponent(btnAddProduto)))
@@ -313,10 +373,10 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         jLabel7.setText("TOTAL:");
         jLabel7.setName("jLabel7"); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel8.setText("R$ 0,00");
-        jLabel8.setName("jLabel8"); // NOI18N
+        jlTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jlTotal.setForeground(new java.awt.Color(204, 0, 0));
+        jlTotal.setText("R$ 0,00");
+        jlTotal.setName("jlTotal"); // NOI18N
 
         btnNovo.setText("Novo");
         btnNovo.setName("btnNovo"); // NOI18N
@@ -329,6 +389,11 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
         btnSalvar.setName("btnSalvar"); // NOI18N
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
@@ -357,7 +422,7 @@ public class GUIVendas extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)))
+                        .addComponent(jlTotal)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -370,8 +435,8 @@ public class GUIVendas extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlTotal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
                     .addComponent(btnCancelar)
@@ -385,28 +450,32 @@ public class GUIVendas extends javax.swing.JInternalFrame {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         txtCodCliente.setEnabled(true);
         txtCodVendedor.setEnabled(true);
+        txtCodigo.setEnabled(true);
         cbxFinalizado.setEnabled(false);
         txtCodProduto.setEnabled(true);
-        txtQtdProduto.setEnabled(true);
         btnNovo.setEnabled(false);
-        btnSalvar.setEnabled(true);
         btnCancelar.setEnabled(true);
-        btnAddProduto.setEnabled(true);
+        
+        VendaService vs = new VendaService();
+//        Venda venda = vs.findLastVenda();
+//        String txtCod = String.valueOf(venda.getIdVenda());
+//        txtCodigo.setText(txtCod);
 }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
+        double total = 0;
         ProdutoService produtoService = new ProdutoService();
-        if(bool != 0)
-        {
-            for(int i=0; i<jTable1.getRowCount(); i++)
-            {
-                listProduto.add(produtoService.findByProd(Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString())));
-            }
+        for(int i=0; i<Integer.parseInt(jsQuantidade.getValue().toString()); i++){
+            listProduto.add(produtoService.findByProd(Integer.parseInt(this.txtCodProduto.getText())));
+            ProdutoTableModel1 produtoTableModel = new ProdutoTableModel1(listProduto);
+            this.jTable1.setModel(produtoTableModel);
         }
-        listProduto.add(produtoService.findByProd(Integer.parseInt(this.txtCodProduto.getText())));
-        ProdutoTableModel1 produtoTableModel = new ProdutoTableModel1(listProduto);
-        bool = 1;
-        this.jTable1.setModel(produtoTableModel);
+        for(int i=0; i<jTable1.getRowCount(); i++)
+        {
+            total = total + Double.parseDouble(jTable1.getValueAt(i, 2).toString());
+        }
+        jlTotal.setText("$ "+String.valueOf(total).substring(0, 4)+"0");
+        cbxFinalizado.setEnabled(true);
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -415,13 +484,122 @@ public class GUIVendas extends javax.swing.JInternalFrame {
         cbxFinalizado.setSelected(false);
         cbxFinalizado.setEnabled(false);
         txtCodProduto.setEnabled(false);
-        txtQtdProduto.setEnabled(false);
         btnNovo.setEnabled(true);
         btnSalvar.setEnabled(false);
         btnCancelar.setEnabled(false);
         btnAddProduto.setEnabled(false);
+        
+        txtCodVendedor.setText("");
+        btnCodVendedor.setEnabled(false);
+        txtCodCliente.setText("");
+        btnCodCliente.setEnabled(false);
+        txtCodigo.setEnabled(false);
+        txtCodProduto.setText("");
+        btnCodProduto.setEnabled(false);
+        jsQuantidade.setValue(0);
+        jsQuantidade.setEnabled(false);
+        jTable1.removeRowSelectionInterval(0, jTable1.getRowCount());
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void txtCodProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProdutoKeyPressed
+        btnCodProduto.setEnabled(true);
+    }//GEN-LAST:event_txtCodProdutoKeyPressed
+
+    private void btnCodProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodProdutoActionPerformed
+        ProdutoService produtoService = new ProdutoService();
+        Produto returned = produtoService.findByProd(Integer.parseInt(this.txtCodProduto.getText()));
+        if(returned != null)
+        {
+            jsQuantidade.setEnabled(true);
+        }else{
+            jsQuantidade.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnCodProdutoActionPerformed
+
+    private void jsQuantidadeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsQuantidadeStateChanged
+        if(Integer.parseInt(jsQuantidade.getValue().toString()) > 0)
+        {
+            btnAddProduto.setEnabled(true);
+        }else{
+            btnAddProduto.setEnabled(false);
+        }
+    }//GEN-LAST:event_jsQuantidadeStateChanged
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        for(int i=0; i<jTable1.getRowCount();i++)
+        {
+            int count = 0;
+            String codItem = jTable1.getValueAt(i, 0).toString();
+            for(int j=i; j<jTable1.getRowCount();j++)
+            {
+                String varrer = jTable1.getValueAt(j, 0).toString();
+                if(varrer.equals(codItem))
+                {
+                    count++;
+                }
+            }
+            ItemVenda itemvenda = new ItemVenda();
+            Produto enter = new Produto(null, jTable1.getValueAt(i, 1).toString(), Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+            itemvenda.setProduto(enter);
+            itemvenda.setQuantidade(String.valueOf(count));
+            listItem.add(itemvenda);
+            count = 0;
+        }
+        Cliente c = new Cliente(txtCodCliente.getText());
+        Vendedor v = new Vendedor(Integer.parseInt(txtCodVendedor.getText()));
+        Set nfVenda = new HashSet(listItem);
+        NotaFiscal nf = new NotaFiscal(null, null, nfVenda);
+        Venda venda = new Venda(c, v, nf, true, nfVenda);
+        VendaService vendaService = new VendaService();
+        try {
+            vendaService.save(venda);
+        } catch (Exception ex) {
+            Logger.getLogger(GUIVendas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void txtCodClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodClienteKeyTyped
+        btnCodCliente.setEnabled(true);
+    }//GEN-LAST:event_txtCodClienteKeyTyped
+
+    private void btnCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodClienteActionPerformed
+        ClienteService cliService = new ClienteService();
+        Cliente returned = cliService.findByCpf(this.txtCodCliente.getText());
+        if(returned == null)
+        {
+            jlAvisoCli.setText("Cliente não encontrado!");
+            btnSalvar.setEnabled(false);
+        }else{
+            jlAvisoCli.setText("");
+            btnSalvar.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnCodClienteActionPerformed
+
+    private void btnCodVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodVendedorActionPerformed
+        VendedorService cliService = new VendedorService();
+        Vendedor returned = cliService.findByID(Integer.parseInt(this.txtCodVendedor.getText()));
+        if(returned == null)
+        {
+            jlAvisoVend.setText("Vendedor não encontrado!");
+            btnSalvar.setEnabled(false);
+        }else{
+            jlAvisoVend.setText("");
+            btnSalvar.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnCodVendedorActionPerformed
+
+    private void txtCodVendedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodVendedorKeyTyped
+        btnCodVendedor.setEnabled(true);
+    }//GEN-LAST:event_txtCodVendedorKeyTyped
+
+    private void cbxFinalizadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbxFinalizadoMouseClicked
+        if(cbxFinalizado.isSelected())
+        {
+            btnSalvar.setEnabled(true);
+        }else{
+            btnSalvar.setEnabled(false);
+        }
+    }//GEN-LAST:event_cbxFinalizadoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduto;
@@ -444,12 +622,14 @@ public class GUIVendas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jlAvisoCli;
+    private javax.swing.JLabel jlAvisoVend;
+    private javax.swing.JLabel jlTotal;
+    private javax.swing.JSpinner jsQuantidade;
     private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtCodProduto;
     private javax.swing.JTextField txtCodVendedor;

@@ -31,6 +31,10 @@ public class Vendedor  implements java.io.Serializable {
     public Vendedor() {
     }
 
+    public Vendedor(int idVendedor) {
+       this.idVendedor = idVendedor;
+    }
+    
     public Vendedor(String nome, Set vendas) {
        this.nome = nome;
        this.vendas = vendas;

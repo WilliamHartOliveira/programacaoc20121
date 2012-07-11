@@ -51,6 +51,14 @@ public class Venda  implements java.io.Serializable {
        this.itemVendas = itemVendas;
        this.notaFiscals = notaFiscals;
     }
+    
+    public Venda(Cliente cliente, Vendedor vendedor, NotaFiscal notaFiscal, Boolean fechado, Set itemVendas) {
+       this.cliente = cliente;
+       this.vendedor = vendedor;
+       this.notaFiscal = notaFiscal;
+       this.fechado = fechado;
+       this.itemVendas = itemVendas;
+    }
    
      @Id @GeneratedValue(strategy=IDENTITY)
     
